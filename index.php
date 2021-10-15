@@ -14,6 +14,6 @@ $default = str_replace("http", "", str_replace("https", "", str_replace("://", "
 <title><?php echo $default?></title>
 </head>
 <body>
-<img id="centerCircle" src="<?php echo $url ?>" title="<?php echo $url ?>"/>
+<img id="circle" src="<?php echo $url ?>" title="<?php echo $url ?>"/>
 </body>
 </html>
