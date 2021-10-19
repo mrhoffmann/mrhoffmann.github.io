@@ -12,4 +12,4 @@ $url="https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?d=".urle
 <title><?php echo str_replace("http","",str_replace("https","",str_replace("://","",$default)))?></title>
 </head>
 <body>
-<img src="<?php echo $url?>" title="<?php echo $url?>"/>
+<a href="#linkToOtherPage" target="_blank"><img src="<?php echo $url?>" title="<?php echo $url?>"/></a>
