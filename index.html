@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>VadIHelveteSkaJagPrataOm?!</title>
+		<meta
+			name="description"
+			content="Visst är det väl en jävla pina att alltid komma på något att prata om?"
+		/>
+		<meta name="author" content="Fredrik Hoffmann" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta charset="utf-8" />
+		<link rel="preconnect" href="https://fonts.gstatic.com/" />
+		<link href="css.css" rel="stylesheet" />
+		<style>
+			body,
+			html {
+				margin: 0;
+				width: 100%;
+				height: 100%;
+			}
+			body {
+				background: url("bg.jpg");
+				background-size: cover;
+				overflow: hidden;
+			}
+
+			a {
+				color: #fff;
+			}
+
+			h1 {
+				font-family: "Roboto", sans-serif;
+				width: 80%;
+				margin: 0 auto;
+				color: #fff;
+				text-align: center;
+			}
+
+			@media screen {
+				h1 {
+					padding-top: 100px;
+					font-size: 3vw;
+				}
+			}
+
+			@media handheld {
+				h1 {
+					font-size: 5vw;
+				}
+			}
+
+			#buttons {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				background: transparent;
+				color: #000;
+				border: 0;
+				height: 15%;
+				cursor: pointer;
+				font-size: 3vh;
+			}
+
+			button {
+				color: #fff;
+				font-size: 4vh;
+				border: 0;
+				height: 100%;
+				width: 33.333333333333334%;
+				cursor: pointer;
+			}
+
+			#rand {
+				color: #333;
+			}
+
+			#prev {
+				background: #fb4934;
+				float: left;
+			}
+
+			#next {
+				background: #06b05b;
+				float: right;
+			}
+
+			button:hover {
+				opacity: 0.7;
+			}
+		</style>
+		<script>
+			var justRandomized = false;
+			var jumpBack = 0;
+			var selected = 0;
+			let topics = [
+				"Vilken tv-serie såg du senast?",
+				"Vad har du för drömmar?",
+				"Hur gammal vore du om du var hälften så gammal som du är nu, men två gånger så gammal som du vore då?",
+				"Gillar du djur?",
+				"Du ska bilda ett företag, vad är din slogan?",
+				"Vad håller dig vaken om nätterna?",
+				"Har du någonsin fått professionell hjälp för mentala/psykiska problem du haft/har?",
+				"Skulle du köpa en katt utan att berätta för din partner?",
+				"Om du fick en gratis resa, vart hade du åkt då?",
+				"Visste du att associera något med en annan grej kan göra det lättare att minnas något? Att tugga tuggummi medan du lär dig något kan skapa en association mellan de två.",
+				"Vilken är den godaste drinken du smakat?",
+				"En person du känner skriker åt dig, hur reagerar du?",
+				"Vart äter du dig själv helst in i koma?",
+				"I vilken stad hade du helst bott i?",
+				"Kan du lösa talet?<br>2x-5=15",
+				"Vad saknar appar som Tinder och Badoo?",
+				"Janne Långben har haft sex.",
+				"Är längden (inte kuken) på en kille viktig?",
+				"Känner du att det är viktigt att rätta folk som säger fel?",
+				"Går du på medicin?",
+				"Är grammatik viktigt?",
+				'Skicka en snap till 3 personer, be varje om att få "Kan du beskriva mig med ett ord?".',
+				"Vad är den billigaste godaste maträtten?",
+				"När lämnade du blodprov senast?",
+				"Det mest avtändande en kille kan säga?",
+				"Visste du att ha inlärningstillfällen på 30 minuter styck med 5 minuter rast mellan vardera kan öka din förmåga att ta in ny information?",
+				"Har du stenkoll på din ekonomi?",
+				"Har du bott i samma stad hela ditt liv?",
+				"Är du uppvuxen i stan eller på landet?",
+				"Äger du i dagsläget ett företag?",
+				"Vad är det pinsammaste du gjort?",
+				"Beskriv med antal föremål av en specifik sort som du väger istället för antal kg.",
+				"Vilka negativa tankar har du när du ska sova?",
+				"Filmer som gjordes förr var bättre?",
+				"Vad får dig att skratta?",
+				"När tog du en promenad senast?",
+				"Är det sexistiskt eller på något sätt utmanande mot den andras förmåga att hålla upp dörren för dem?",
+				"Du bor i Svenstavik, vad hittar du på då?",
+				"Vilket land besökte du senast?",
+				"Visste du att du kan få i dig tillräckligt med vitaminer, mineraler, protein, kolhydrater och fett utan att behöva äta kött?",
+				"Om du starta ett företag, vad skulle du sälja?",
+				"Vad är det bästa/största du uppnått?",
+				"Vilket är ditt drömjobb?",
+				"Är du tidspessimist eller optimist?",
+				"Försöker du lära dig något aktivt?",
+				"Äldsta du äger?",
+				"Vad var bäst med din uppväxt?",
+				"Är smällare och raketer kul?",
+				"Är du en sån person som normalt skjuter upp grejer?",
+				"Be den du pratar med att komma på något?",
+				"Du har haft huvudvärk i 3 dagar, du känner dig överhuvudtaget seg sedan längre tid, vad gör du åt det?",
+				"Vad ansåg du var coolt när du var 10-12 år gammal?",
+				"När är du född?",
+				"Vem saknar du just nu?",
+				"Hur ofta är för mycket för att onanera på en vecka?",
+				"Vad har varit en nära döden upplevelse för dig?",
+				"Om du var tvungen att välja ett fysiskt krävande jobb istället för ett kontorsjobb, vilket skulle du valt?",
+				"Har du någonsin tvingat någon att göra någonting, vad?",
+				"Vad hade din första bil för bilmärke?",
+				"Du har hemmafest, när ska alla sticka?",
+				"Är du en rolig person?",
+				"Hur många bilar har du ägt?",
+				"Vad är det tyngsta du lyft med händerna?",
+				"Är du en ärlig person?",
+				"Bästa låten under sexy time?",
+				"Vilken är din favorit disney film?",
+				"Visste du att din syn på dig själv är din egen? Många tror och tycker mer om dig än du själv gör.",
+				"Läsk är viktigt?",
+				"Loppisar är bara för fattiga?",
+				"Kan du fixa enkla fel på din bil, t.ex. en säkring eller lampa?",
+				"Du ska bli överraskad, på ett bra sätt, hur?",
+				"Vad är det sämsta du gjort i trafiken?",
+				"Vad är det svåraste du vet?",
+				"Personer har 100% odds att dö under sin livstid.",
+				"Finns det ämnen du anser är tabu?",
+				"Favoritlåt?",
+				'<a href="https://www.youtube.com/user/NocturnoPlays" target="_blank">Life of Boris</a>',
+				"Väder",
+				'<a href="https://www.youtube.com/watch?v=s90ZrJS7BBU" target="_blank">Vines</a> var riktigt najs att ha i sitt liv.',
+				"Vad är det mest tabu du äger?",
+				"Har du nånsin sett ett spöke?",
+				"Har du någonsin haft en partner som avlidit under ert förhållande?",
+				"Har du varit med om ett trauma någon gång?",
+				"Du får en oväntad faktura på 2000kr, har du råd den 15:e en månad att betala den?",
+				"Sämsta valet du gjort i år?",
+				"Är laptop bättre än en desktop?",
+				"Visste du att en person som faktiskt gillar dig hittar ursäkter och tillfällen att kommunicera med dig utan att du behöver initiera kontakt?",
+				"När blev du ordentligt jävla lurad senast?",
+				"Godaste energidrycken?",
+				"Om du ligger på soffan och ska titta på en sport, vilken sport tittar du helst på?",
+				"Hur gammal var du när du tog körkortet?",
+				"Dreamworks eller Disney?",
+				"Vad gick du för utbildning på gymnasiet?",
+				"Har du någonsin blivit utnyttjad av någon på något sätt?",
+				"Ska andra rätta sig efter dig?",
+				"Om du blev arbetslös just nu, hur länge skulle du klara dig utan ekonomiskt stöd av A-kassa?",
+				"Vad är den högsta examen du tagit från för typ av skola?",
+				"Du får ett ord för att beskriva dig själv (t.ex. ful, fet, gammal) - vad är ordet?",
+				"Kommer du hit ofta?",
+				"Vilken film skulle du kunna rekommendera till vem som helst?",
+				"Tar du itu med grejer?",
+				"Bor du på landet eller i stan?",
+				"Vilken högtid är viktigast för dig?",
+				"Iggar du folk?",
+				"Har du en eftergymnasial utbildning, isåfall, i vad?",
+				"Varför är du singel just nu?",
+				"Vad är det svåraste med ett förhållande?",
+				"Husvagn, skjul, bil, lägenhet, hus, husbil, garage, släpvagn, vad sover du helst i av dem?",
+				"Visste du att utseendet på vad du äter spelar mycket större roll än vad det faktiskt smakar?",
+				"Hur kommer du dö?",
+				"Står eller sitter du när du torkar dig i rumpan?",
+				"När gjorde du senast något fysiskt krävande?",
+				"Vad är den bästa överraskningen du kommit hem till?",
+				"Vad är den största/värsta kritiken du fått?",
+				"Har du någon som du kan be om vad som helst av?",
+				"Ni är oense, ni kan inte bestämma er, hur gör ni upp?",
+				"Kan du laga fin mat?",
+				"Du får en miljon, investerar eller spenderar du?",
+				"Vad är viktigast när du köper en ny telefon?",
+				"Har du någonsin läst en kvällskurs, kurs eller övat in något som inte har med ditt jobb att göra?",
+				"Vad är din favoritsyssla när du kommer hem efter jobbet?",
+				"Föredrar du att få signaler eller direkta besked?",
+				"Vad är du mest tacksam över?",
+				"Hur gammal vore du om din syster var 6 år gammal när du var 9 och hennes ålder delat i 2 är 39?",
+				"Vad är det största du åstadkommit?",
+				"Är du kreativt lagd?",
+				"Hur länge har du jobbat på det jobb du jobbar på nu?",
+				"Trivs du?",
+				"Hur fick du det jobbet?",
+				"Varför är du kvar?",
+				"Vad betyder vänskap för dig?",
+				"Det är pandemi, klockan är 13:29 på en tisdag, du är ledig, vad gör du?",
+				"Det är lördag, klockan är 16:49, du har inte gjort några planer, vad ska du hitta på?",
+				"Exet kommer in på krogen. Vad gör du?<br>A) En fetsmäll så hen slocknar<br>B) Berättar för den jävla råttan att dra<br>C) Inte ett skit, vem fan bryr sig?",
+				"Vad blir du helst av med? Dina armar eller ben?",
+				"Vad är det knäppaste du gjort påverkad?",
+				"Visste du att om du stänger dina ögon är det svårt att se?",
+				"Bästa filmen?",
+				"Hur mycket pengar behöver du minst för att ligga med någon?",
+				"Kan man lita på dig?",
+				"Hur många sexleksaker äger du?",
+				"Vilken längd är den kortaste du varit med?",
+				"Vad väger mest, ett kilo fjädrar eller ett kilo tegelstenar?",
+				"Minns du verkligen hur det var att stå ut med kvalitén av en DVD-film?",
+				"Vilken är den äckligaste osten?",
+				"Du ska bli bonde, emot din vilja såklart, men vad hade du velat ha för djur om du fick välja vilka?",
+				"Är våld utanför film/serier coolt?",
+				"Vad hatar du mest?",
+				"Du är ute och åker, du ska köra 30 mil, vad vill du ha i bilen?",
+				"Gör du hellre rätt första gången, till risk att det tar 3x längre tid eller gör du det hellre snabbt och hoppas på det bästa?",
+				"Det regnar, du är ful och det är ensamt. Vad gör du?",
+				"Du fick 50 000 SEK, vad går pengarna åt till?",
+				"Tittar du fortfarande på Kalle Anka på julafton?",
+				"Om du var tvungen att välja mellan drama, komedi eller action att titta på resten av livet, vilken skulle du välja?",
+				"Har du läst en bok nyligen?",
+				"Om du hade ett lån på 30'000 SEK, du kan avbetala det maximalt 1200 per månad, hade du tagit ett extrajobb på helger eller lediga dagar för att kunna avbetala det 6000 SEK i månaden istället?",
+				"Köpa sexleksaker för 3000 eller träffa någon random?",
+				"Katt eller hund?",
+				"Visste du att en mans könsorgan kan regleras i storlek beroende på hur kåt han är?",
+				"Har du blåa ögon till situationer och beslut?",
+				"Kan du överväga att ta en påse och plocka upp skräp när du tar en promenad?",
+				"Vad är det läskigaste du varit med om?",
+				"Investerar du i dig själv? Psykisk hjälp, kläder, god mat och dryck som du känner att du vill ha?",
+				"Visste du att du kan reglera din egen andning?",
+				"Har du någonsin stulit någonting?",
+				"Spelar du spel?",
+				"Hur länge sover hästar? - Tills de vaknar.",
+				"Kan man ha relationer som inte blir sexuella?",
+				'Skicka en fråga till 5 personer, be dem "Berätta om 3 styrkor jag har.". Prata nu med din bästa vän om dessa stämmer och vad ni känner om svaren.',
+				"Skulle du beskriva dig själv som en extro- eller introvert?",
+				"Vid vilken ålder lärde du dig simma?",
+				"Äger du en pyjamas?",
+				"Har du någonsin jagat förr?",
+				"Favoritklädesplagg?",
+				"Vilket är det värsta skämtet du hört?",
+				"Ideala första dejten?",
+				"Har du nånsin ägt ett GameBoy?",
+				"Vad är det mest galna du gjort?",
+				"Regn eller solsken?",
+				"Det är årsdag, du och partnern ska hitta på något, vem bestämmer och vad vill du göra?",
+				"Är du en skeptisk person?",
+				"Android eller iOS och varför?",
+				"Visste du att alla kvinnor inte bryr sig om kroppsideal?",
+				"Är miljön viktig för dig?",
+				"Cola zero, Pespi Max, Pespi eller Cola?",
+				"Bästa filmen för som passar när som helst?",
+				"Vad är det dyraste du har?",
+				"Vilket ord stavas fel i alla ordböckerna? - Ordet fel.",
+				"Vid vilken ålder lärde du dig cykla?",
+				"Vad hette den första skola du gick på?",
+				"Har du avsiktligen någonsin fått två personer att inte gilla varann?",
+				"Vilken nivå av levnadsstandard skulle du klassa dig i<br><br>a) Hög<br>b) Mellan<br>c) Låg<br><br>Argumentera",
+				"Rosor är röda, violer är blå, fattar inte du att det är på två meters avstånd du ska stå?",
+				"Du ska ha ihjäl ett av dina syskon, vem och varför?",
+				"Hoffmanns.nu är fedt najs, hört om den sidan?",
+				"Varför är du?",
+				"Har du haft en KK?",
+				"Äter du ute ofta?",
+				"Cykel eller moped, vilken är bättre?",
+				"Visste du att många män känner att de får för lite komplimanger?",
+				"Vad vill du att andra ska märka om dig?",
+				"Om ni inte har sex regelbundet - är det ett problem?",
+				"Är flirtande otrohet?",
+				"Vad tycker du om personer som du pratar med om ett ämne och svarar på din fråga eller ämne, men inte frågar något tillbaka?",
+				"Dealbreaker i en relation?",
+				"Vad får dig att skratta?",
+				"Har du någonsin kört över ett djur?",
+				"Sämsta dejtupplevelsen?",
+				"Sämsta superkraften?",
+				"Parfym som luktar bäst?",
+				"Hur mycket pengar investerar du i dig själv månadsvis?",
+				"Favoritsadjektiv att kalla en jobbig person?",
+				"Bästa bilmärket och varför?",
+				"Tyngsta du äger?",
+				"Vad skulle du bli ihågkommen för?",
+				"Vad är det första du letar efter i en person?",
+				"Hur gammal var du när du förstod att du inte var rik trots att du hade en hundring i fickan?",
+				"Vad vill du få ut av livet?",
+				"Är tåg bästa färdmedlet för att åka långt inomlands?",
+				"Om du fick en grej som du fick ändra med dig själv, vad skulle det vara?",
+				"En sak du ångrar",
+				"Vilken är den viktigaste appen på din telefon?",
+				"Vad gjorde att du hade det största grälet du nånsin haft och vem vann?",
+				"Om du stod på ICA, du ser en gammal gubbe som inte kan betala, det saknas tio kronor, hade du hjälpt honom?",
+				"Om du får hem en skitsnygg kille/tjej från vart fan du nu raggar, hade det varit en dealbreaker om hen var hermafrodit?",
+				"Kassler är det äckligaste",
+				"Vad är det viktigaste på julbordet?",
+				"Vaccin, för eller emot?",
+				"Rosor är röda, jag kan inte stå på händer, Jimmie Åkesson hatar folk från andra länder",
+				"Hur många kan du öppna upp dig till?",
+				"På en skala mellan 1-10, hur social är du?",
+				"Sämsta livsrådet?",
+				"Är du starkt beroende av att köpa grejer?",
+				"Är det irriterande när du är den enda som kommer på saker att prata om?",
+				"Äckligaste godisen",
+				"Det jobbigaste du behövt göra?",
+				"Har du stora skulder?",
+				"Hur inleder du helst ett samtalsämne med en person du inte känner sedan tidigare?",
+				"Pratar du med folk du inte känner på fester?",
+				"Har du svårt att somna?",
+				"Är du en person som övertänker eller glider igenom livet?",
+				"Vad är prio ett efter lönen kommit in?",
+				"Vad är din största mentala block?",
+				"Är du deprimerad?",
+				"Hur ful är inte du då?",
+				"Hur ofta borstar du tänderna?",
+				"Godaste bäret?",
+				"Går du på fördomar, en person har varit med om x eller har diagnosen y, spelar det roll?",
+				"En person du inte känner sätter sig ner vid ert bord på krogen, personen känner din vän men inte dig, hur reagerar du?<br><br>a) Tyst och pratar bara om andra pratar<br>b) Initierar och försöker lära känna den andra<br>c) Beskriv med egna ord",
+				"Vad skulle du vilja vara känd för?",
+				"5 Heineken sen är du full?",
+				"Fjortisfylla är din grej va?",
+				"Behöver du söka hjälp?",
+				"Vad är du mest stolt över?",
+				"Vilken gubbe ser man aldrig på sommaren? - Snögubben.",
+				"Har du en god förståelse för hur aktier eller fonder fungerar?",
+				"Har du ett sparkapital?",
+				"Blond, brunett, rödhårig eller annat, vad väljer du?",
+				"Är kroppshår äckligt?",
+				"Har du körkort?",
+				"Längsta tiden du spenderat i någon form av butik?",
+				"Har du haft en nära döden upplevelse någon gång? Vad hände?",
+				"Hur många diagnoser har du?",
+				"Sämsta kvalitén hos en person är?",
+				"Hur stora är dina fasta utgifter månadsvis?",
+				"I diameter, hur många meter är din favorit sexleksak?",
+				"Har du nånsin brutit mot lagen? Vad gjorde du?",
+				"Vad är det värsta en människa kan göra?",
+				"En splitter ny bil, ett nybyggt hus enligt dina önskemål eller en familj, vilken väljer du?",
+				"Är det viktigt att gilla samma saker i en relation?",
+				"Vad var det äckligaste du stoppat i din mun?",
+				'Är du en s.k. "social justice warrior"?',
+				"Vad är skillnaden mellan en anka?",
+				"Du ser ett problem i världen, föredrar du att klaga om det tills du inte längre kan ta andetag eller försöker du rätta det?",
+				"När grät du senast och varför?",
+				"Vad ville du bli när du blev liten och varför fan blev det inte av?",
+				"Vad äter du när du mår skit?",
+				"Du har inget internet och du kommer inte få det förrän imorgon, vad gör du resten av dagen?",
+				"Är storlek viktigt för dig?",
+				"Vad köpte du sist för möbel?",
+				"Är du nöjd med ditt liv just nu?",
+				"Vad får dig att le?",
+				"Vad väger du?",
+				"När visa du dig naken för någon sist?",
+				"Hur mycket väger ditt äldsta syskon?",
+				"Du ska dö, nu, du ska säga något för att de andra ska minnas dig (ja, folk står runt dig just nu), vad säger du?",
+				"Hur många har du legat med då? Ditt fnask.",
+				"Vad samlar du på?",
+				"Vem gjorde slut i er din förra relation, varför?",
+				"Slutför meningen: Om jag hade en _ skulle jag vara lycklig.",
+				"Favoritbil?",
+				"Har du många vänner din ensamma jävel?",
+				"Varför är du så ful?",
+				"Vilken musikgenre lyssnar du helst på?",
+				"Vad ska man uppnå med livet?",
+				"När anser du att man räknas som vuxen?",
+				'<a href="https://www.youtube.com/watch?v=nQ2nL3yKGRc" target="_blank">YouTube</a> är en bra plats för massor med jävla skit, har du ett favoritklipp?',
+				"När bör man skaffa barn (ålder)?",
+				"Vad köpte du senast?",
+				"Mörkläggande gardiner är gåvan från ovan?",
+				"Vad är de 4 saker du senast fotade?",
+				"Är utseende allt?",
+				"Hur mäter du lycka?",
+				"Vad är det man har framför sig men ändå inte kan se? - Framtiden.",
+				"Är man framgångsrik om man tjänar mycket pengar?",
+				"Vore du hellre ensam med mycket pengar eller tvärtom?",
+				"Äter du kött?",
+				"Beskriv din crush",
+				"Hur mår du? Egentligen.",
+				"Vad är din favoritgrej med Ryssland?",
+				"Vad tycker du om Putin? Är han snygg eller?",
+				"Hade inte Hitler lite rätt ändå? Asså lite grann?",
+				"Röv eller tuttar, vad föredrar du?",
+				"Vaknar du tidigt eller sent?",
+				"Har du piercingar?",
+				"Det blev strömavbrott, en säkring är trasig, vad gör du?",
+				"Om du fick bli bra på någonting, vad som helst, vad skulle du vilja vara bra på? Din jävla sopa..",
+				"Vet din far att du ej har oskulden kvar?",
+				"Har du någonsin haft en partner som varit otrogen?",
+				"När söp du ner dig själv redigt jävla ordentligt senast?",
+				"Rakat eller inte? Skägg alltså.",
+				"Beskriv den optimala partnerrelationen",
+				'Är det okej att säga saker som "han är stadig" istället för att säga att "han är tjock"?',
+				"Vad finns alltid i ditt kylskåp?",
+				"Du ska lära dig ett nytt språk, vilket?",
+				"Är pengar det viktigaste?",
+				"Vad kan du bara göra i hemlighet?",
+				"Hur ofta dammsuger du? Din jävel.",
+				"Sanning eller konka?",
+				"Har du någonsin åkt polisbil? Varför?",
+				"Varför skrattar inte du oftare?",
+				"Vem känner dig bäst?",
+				"Har du tv i sovrummet?",
+				"Har du någon tatuering?",
+				"Om du dog idag, säg om 5 minuter för att göra det lätt, vad hade du velat lämna efter?",
+				"Vad vill du hinna göra innan du dör?",
+				"Hur ofta är det lämpligt att duscha?",
+				"Är det du eller din partner i er relation som stökar mest?",
+				"Kan du öppna upp dig för din familj?",
+				"Om du är uttråkad och du är med någon, tar du ansvar att lösa situationen?",
+				"Har du syskon? Hur många?",
+				"Har du någonsin (även oavsiktligt) dödat ett djur?",
+				"Vad är det finaste du äger?",
+				"Favorittårta?",
+				"Ljusa eller mörka möbler?",
+				"Det är helg, du har pengar över, vad är det du vill hitta på?",
+				"Du får välja en grej på en person som du ska börja dejta helt fritt, vad väljer du att den personen ska ha?",
+				"Vem följer du frenetiskt på YouTube?",
+				"Roadtrip nu, direkt, du har 10 grejer som får följa, du har 30 sekunder på dig. Vad ska med?",
+				"Men sitt ner och håll käften istället för att prata för en gångs skull...",
+				"Varför ska du komma på något? Säg åt den där jäveln i andra änden att komma på något.",
+				"Om någon behöver hjälp, erbjuder du dig innan du blir frågad?",
+				"Är vinter bättre än sommar?",
+				"Har du skjutit pilbåge?",
+				"Hur ofta byter du sängkläder?",
+				"Vilket spel kan du spela flera timmar i utan att ens tänka på att du gjort det?",
+				"Skulle du snömula ett barn?",
+				"Får du lätt abstinens?",
+				"Får du lätt blåmärken?",
+				"Hur ofta simmar du i sjön på somrar?",
+				"När var du på IKEA senast?",
+				"Anser du dig själv som optimist eller pessimist?",
+				"Kör du skoter regelbundet?",
+				"Kan du gå in i en affär och ut utan att köpa något - och ändå känna dig som en kriminell?",
+				"Är du spelberoende av kasino-tjänster eller lotteri?",
+				"Lägger du dig lätt i vad andra tycker?",
+				"Känner du att det är viktigt att dela åsikter?",
+				"Om du får din åsikt nedskjuten, försvarar du den?",
+				"Vad är det tyngsta fordon du kört?",
+				"Hur många gånger har du flyttat?",
+				"Hur många skolor har du gått på?",
+				"Har du någonsin misslyckats med en utbildning?",
+				"Vad tror du fick in dig i yrket du jobbar i nu?",
+				"Är religion viktigt?",
+				"Vad har din äldre släkt lärt dig som du känner har varit en viktig läxa?",
+				"När fick du din första puss?",
+				"Prioriterar du dig själv före andra?",
+				"Gör du en matsedel över veckan eller kör du bara vad du känner för?",
+				"Hur stor säng har du?",
+				"På en skala mellan 1-10, hur snygg måste en person vara för att du ska ha sex med dem?",
+				"Föredrar du drama över reality?",
+				"Om du fick vara osynlig en hel dag, vad skulle du göra? Berätta i ordning från att du vaknade.",
+				"Du blir erbjuden en befordran, men du får ingen högre lön. Du får fler ansvarsområden, tar du jobbet ändå?",
+				"Din syster har problem och behöver att du åker och hjälper henne, hon är 80 mil bort, gör du det?",
+				"Skulle du ta ledigt för att hjälpa någon - en dag exempelvis?",
+				"Din bil är trasig, lagar du den själv eller ber du någon annan om hjälp?",
+				"Vad tar du helst? En trisslott eller en 20-lapp?",
+				"Vilken var den första spelkonsolen du spelade på?",
+				"Har du ett spelintresse?",
+				"Har du någonsin spenderat stora pengar på lotteri och förlorat dem?",
+				"Har du något starkt beroende?",
+				"När blev du som senast väldigt skrämd? Av vad?",
+				"Är du lättskrämd annars?",
+				"Halsa eller smutta?",
+				"Handlar du när du har tråkigt?",
+				"Vodka eller cider?",
+				"När gick du på bio senast? Vad såg du?",
+				"Du ska gå på semester imorgon, du har tagit ledigt 2 veckor. Alla dina planer blir inställda på grund av en omständighet och du måste nu hitta på något annat, vad gör du istället?",
+				"Fiskar du?",
+				"Roligaste fordonet att köra?",
+				"Osexigaste kroppsdelen?",
+				"Tvättar du fötterna när du duschar?",
+				"Vad är okej köp att skuldsätta sig för?",
+				"Vilken är den största skuld du haft?",
+				"Skickar du naken/lättklädda bilder till folk?",
+				"Vid vilken ålder blev du av med oskulden?",
+				"Är storlek viktigt?",
+				"Du ska ha sex med någon, kuken ser ut som en parantes, vad gör du?",
+				"Är att duscha bättre eller sämre än att bada?",
+				"Du får tio miljarder kronor, du är ekonomiskt oberoende för resten av ditt liv såvida du inte byter livsstandard. Hur kommer dina närmaste år se ut?",
+				"En nära kompis till dig har hamnat hos kronofogden, hjälper du dem?",
+				"En familjemedlem har lånat din bil och kört sönder den, kopplingen bara sa yeet. Kräver du din familjemedlem på att fixa den?",
+				"Du har lagt ett löfte, är detta omöjligt att bryta eller är löften för dig något som kan ändras?",
+				"Har du nånsin kört en vit månad?",
+				"Kan du gå in på en hemsida utan att köpa något?",
+				"Har du tagit droger?",
+				"Vilket barndomsintresse hade du som du övergett?",
+				"James Bond eller Mission Impossible?",
+				"Skulle du hellre berätta för din partner om dina problem eller ruva på dem själv?",
+				"Om du är oense med någon om en sak, argumenterar du om det eller nöjer du dig med att ni har olika åsikter?",
+				"Du får ett jobberbjudande, jobbet ligger 30 mil bort, du har familj och din nyblivna partner här, tar du jobbet?",
+				"Är kärlek prioriterat över din finansiella situation?",
+				"Skulle du klassa dig själv som en romantiker?",
+				"Vad är den mest romantiska gärning du gjort?",
+				"Har du någonsin haft sex i en säng som inte är din?",
+				"Vilken är den mest konstiga plats du haft sex på?",
+				"När anser du att man blir oskuld igen?",
+				"Är antalet sexpartner viktigt för dig?",
+				"Är du öppen sexuellt för andra ställningar och fetischer?",
+				"Det läskigaste någon gjort under en sexakt?",
+				"Skulle du ligga med en person bara för att få dem att sluta fråga om sex?",
+				"Är utseende viktigt?",
+				"Dyraste du köpt till någon?",
+				"Har du någonsin haft en sugar daddy eller sugar mama?",
+				"Om du låg illa till ekonomiskt, du har skulder över 100'000 och vet inte när du nånsin kan få till att betala av det, hade du haft sex för att bli av med skulden?",
+				"Har du hoppat isvak?",
+				"Har du gjort din läxa?",
+				"Kom du ihåg det där du skulle göra imorgon?",
+				"Hur länge behöver du ha känt någon för att ha sex med dem?",
+				"Blir du enkelt känslosam?",
+				"Har du snapchat?",
+				"Bästa minnet från en fylla?",
+				"När slog du någon senast och varför?",
+				"Du matchar med någon på Tinder/Badoo/kallaDetVadFanDuVill, tar du initiativ eller väntar du?",
+				"Blir du lätt kall?",
+				"Är mysa/gulla ihop på soffan bättre än sex?",
+				"Den värsta sexupplevelsen?",
+				"Du är med en ny person, du märker att personen vill ha sex, men du vill inte. Kan du säga nej?",
+				"Anser du att du är otrevlig om du säger nej?",
+				"Överst eller underst?",
+			];
+		</script>
+	</head>
+
+	<body>
+		<a href="http://vadihelveteskajagprataom.hoffmanns.nu/?topic=190" id="link"
+			>190/450</a
+		>
+		<h1 id="container">
+			Har du avsiktligen någonsin fått två personer att inte gilla varann?
+		</h1>
+		<div id="buttons">
+			<button onclick="prev()" id="prev">förra</button>
+			<button onclick="random()" id="rand">slumpa</button>
+			<button onclick="next()" id="next">nästa</button>
+		</div>
+
+		<script>
+			function parseParam(query) {
+				var retval = undefined;
+				window.location.search.split("&").forEach(function (elem) {
+					elem = elem.replace("?", "");
+					if (elem.split("=")[0] == query) {
+						retval = [elem.split("=")[0], Math.floor(elem.split("=")[1])];
+					}
+				});
+				return retval;
+			}
+
+			function init() {
+				let values = parseParam("topic");
+				if (typeof values != "undefined") {
+					if (typeof values[1] == "number") {
+						if (values[1] >= 0 && values[1] <= topics.length) {
+							selected = values[1];
+						}
+					}
+				} else {
+					selected = Math.floor(Math.random() * topics.length);
+				}
+				set(selected);
+			}
+
+			function random() {
+				set(Math.floor(Math.random() * topics.length));
+				justRandomized = true;
+			}
+
+			function prev() {
+				if (justRandomized) {
+					justRandomized = false;
+				} else {
+					if (selected - 1 >= 0) {
+						selected--;
+					} else {
+						selected = topics.length - 1;
+					}
+				}
+				set(selected);
+			}
+
+			function next() {
+				if (selected + 1 < topics.length) {
+					selected++;
+				} else {
+					selected = 0;
+				}
+				set(selected);
+			}
+
+			function set(position) {
+				document.getElementById("container").innerHTML = topics[position];
+				document.getElementById("link").innerHTML =
+					position + "/" + topics.length;
+				document.getElementById("link").href =
+					"http://vadihelveteskajagprataom.hoffmanns.nu/?topic=" + position;
+			}
+			init();
+		</script>
+	</body>
+</html>
