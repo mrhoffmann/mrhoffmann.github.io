@@ -1054,7 +1054,8 @@
 			if (typeof values != 'undefined') {
 				if (typeof values[1] == 'number') {
 					if (values[1] >= 0 && values[1] <= topics.length) {
-						selected = values[1] - 1;
+						if (values[1] == 0) selected = 0;
+						else selected = values[1] - 1;
 					}
 				}
 			} else {
