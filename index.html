@@ -582,6 +582,7 @@
 				'Vågar du ta in sexleksaker till sovrummet?',
 				'Längtar du till jobbet?',
 				'Kan man lita på dig?',
+				'Hur många sexleksaker äger du?',
 				'Vilken längd hade den kortaste personen du varit med? Allt före gymnasiet räknas inte.',
 				'Vad väger mest, ett kilo fjädrar eller ett kilo tegelstenar?',
 				'Minns du verkligen hur det var att stå ut med kvalitén av en DVD-film?',
@@ -595,7 +596,6 @@
 				'Det regnar, du är ful och det är ensamt. Vad gör du?',
 				'Du fick 50 000 SEK, vad går pengarna åt till?',
 				'Tittar du fortfarande på Kalle Anka på julafton?',
-				'Vågar du gå ut utan broddar?',
 				'Bor du hellre i lägenhet, hus eller på en gård?',
 				'Sonic eller Mario?',
 				'Bästa stället att bo på?',
@@ -617,7 +617,7 @@
 				'Äger du en bil?',
 				'Spelar du spel?',
 				'Hur länge sover hästar? - Tills de vaknar.',
-				'Kan man ha romantiska relationer som inte blir sexuella?',
+				'Kan man ha relationer som inte blir sexuella?',
 				'Skicka en fråga till 5 personer, be dem "Berätta om 3 styrkor jag har.". Prata nu med din bästa vän om dessa stämmer och vad ni känner om svaren.',
 				'Skulle du beskriva dig själv som en extro- eller introvert?',
 				'Vid vilken ålder lärde du dig simma?',
@@ -672,7 +672,7 @@
 				'Cykel, gå eller moped, vilken är bättre?',
 				'Visste du att många män känner att de får för lite komplimanger?',
 				'Vad vill du att andra ska märka om dig?',
-				'Om ni inte har sex regelbundet i en relation - är det ett problem?',
+				'Om ni inte har sex regelbundet - är det ett problem?',
 				'Är flirtande otrohet?',
 				'Vad tycker du om personer som du pratar med om ett ämne och svarar på din fråga eller ämne, men inte frågar något tillbaka?',
 				'Dealbreaker i en relation?',
@@ -773,6 +773,7 @@
 				'Sämsta kvalitén hos en person är?',
 				'Vad är det mest attraktiva med din partner?',
 				'Hur stora är dina fasta utgifter månadsvis?',
+				'I diameter, hur många meter är din favorit sexleksak?',
 				'Har du någonsin brutit mot lagen? Vad gjorde du?',
 				'Vad är det värsta en människa kan göra?',
 				'En splitter ny bil, ett nybyggt hus enligt dina önskemål eller en familj, vilken väljer du?',
@@ -916,6 +917,7 @@
 				'Skickar du naken/lättklädda bilder till folk?',
 				'Vid vilken ålder blev du av med oskulden?',
 				'Är storlek viktigt?',
+				'Du ska ha sex med någon, kuken ser ut som en parantes, vad gör du?',
 				'Är att duscha bättre eller sämre än att bada?',
 				'Du får tio miljarder kronor, du är ekonomiskt oberoende för resten av ditt liv såvida du inte byter livsstandard. Hur kommer dina närmaste år se ut?',
 				'En nära kompis till dig har hamnat hos kronofogden, hjälper du dem?',
@@ -939,7 +941,7 @@
 				'Har du någonsin varit med en vuxen person som gillat axe?',
 				'Vilken är den konstigaste plats du haft sex på?',
 				'När anser du att man blir oskuld igen?',
-				'Är antalet sexpartner din potentiella partner haft viktigt för dig?',
+				'Är antalet sexpartner viktigt för dig?',
 				'Är du öppen sexuellt för andra ställningar och fetischer?',
 				'Det läskigaste någon gjort under en sexakt?',
 				'Skulle du ligga med en person bara för att få dem att sluta fråga om sex?',
@@ -959,6 +961,8 @@
 				'Du matchar med någon på Tinder/Badoo/kallaDetVadFanDuVill, tar du initiativ eller väntar du?',
 				'Blir du lätt kall?',
 				'Är mysa/gulla ihop på soffan bättre än sex?',
+				'Den värsta sexupplevelsen?',
+				'Du är med en ny person, du märker att personen vill ha sex, men du vill inte. Kan du säga nej?',
 				'Anser du att du är otrevlig om du säger nej?',
 				'Överst eller underst?',
 			];
@@ -1049,13 +1053,14 @@
 			let values = parseParam('topic');
 			if (typeof values != 'undefined') {
 				if (typeof values[1] == 'number') {
-					if (values[1] >= 0 && values[1] <= topics.length - 1) {
-						set(values[1]);
+					if (values[1] >= 0 && values[1] <= topics.length) {
+						selected = values[1] - 1;
 					}
 				}
 			} else {
-				set(getRand());
+				selected = getRand();
 			}
+			set(selected);
 		</script>
 	</body>
 </html>
