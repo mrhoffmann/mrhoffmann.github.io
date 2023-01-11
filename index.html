@@ -135,7 +135,6 @@
 			}
 		</style>
 		<script>
-			var justRandomized = false;
 			var selected = 0;
 			const topics = [
 				'Vilka språk kan du?',
@@ -1034,26 +1033,18 @@
 			function random() {
 				selected = Math.floor(Math.random() * topics.length);
 				set(selected);
-				justRandomized = true;
 			}
 
 			function prev() {
-				if (justRandomized) {
-					justRandomized = false;
+				if (selected - 1 >= 0) {
+					selected--;
 				} else {
-					if (selected - 1 >= 0) {
-						selected--;
-					} else {
-						selected = topics.length - 1;
-					}
+					selected = topics.length - 1;
 				}
 				set(selected);
 			}
 
 			function next() {
-				if (justRandomized) {
-					justRandomized = false;
-				}
 				if (selected + 1 < topics.length) {
 					selected++;
 				} else {
