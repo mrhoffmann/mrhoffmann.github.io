@@ -111,8 +111,9 @@
 		</style>
 		<script>
 			var justRandomized = false;
+			var jumpBack = 0;
 			var selected = 0;
-			const topics = [
+			let topics = [
 				'Vilka språk kan du?',
 				'Vad fick dig att få dåligt självförtroende?',
 				'Hur vet man att du är glad?',
@@ -639,6 +640,7 @@
 				'Vilken nivå av levnadsstandard skulle du klassa dig i<br><br>a) Hög<br>b) Mellan<br>c) Låg<br><br>Argumentera',
 				'Rosor är röda, violer är blå, fattar inte du att det är på två meters avstånd du ska stå?',
 				'Du ska ha ihjäl ett av dina syskon, vem och varför?',
+				'Hoffmanns.nu är fedt najs, hört om den sidan?',
 				'Varför är du?',
 				'Har du haft en KK?',
 				'Äter du ute ofta?',
@@ -790,6 +792,8 @@
 				'Äter du kött?',
 				'Beskriv din crush',
 				'Hur mår du? Egentligen.',
+				'Vad är din favoritgrej med Ryssland?',
+				'Vad tycker du om Putin? Är han snygg eller?',
 				'Röv eller tuttar, vad föredrar du?',
 				'Vaknar du tidigt eller sent?',
 				'Har du piercingar?',
@@ -872,7 +876,7 @@
 				'Har du någonsin spenderat stora pengar på lotteri och förlorat dem?',
 				'Har du något starkt beroende?',
 				'När blev du som senast väldigt skrämd? Av vad?',
-				'Är du lättskrämd?',
+				'Är du lättskrämd annars?',
 				'Halsa eller smutta?',
 				'Handlar du när du har tråkigt?',
 				'Vodka eller cider?',
@@ -920,6 +924,7 @@
 				'Dyraste du köpt till någon?',
 				'Har du någonsin haft en sugar daddy eller sugar mama?',
 				'Är du en blyg person?',
+				"Om du låg illa till ekonomiskt, du har skulder över 100'000 och vet inte när du nånsin kan få till att betala av det, hade du haft sex för att bli av med skulden?",
 				'Har du hoppat isvak?',
 				'Har du gjort din läxa?',
 				'Kom du ihåg det där du skulle göra imorgon?',
@@ -947,9 +952,18 @@
 		</div>
 		<div id="buttons">
 			<div id="wrapper">
-				<button onclick="prev()" id="prev"><</button>
-				<button onclick="random()" id="rand"></button>
-				<button onclick="next()" id="next">></button>
+				<button onclick="prev()" id="prev" aria-label="Förra" title="Förra">
+					<
+				</button>
+				<button
+					onclick="random()"
+					id="rand"
+					aria-label="Slumpa"
+					title="Slumpa"
+				></button>
+				<button onclick="next()" id="next" aria-label="Nästa" title="Nästa">
+					>
+				</button>
 			</div>
 		</div>
 
