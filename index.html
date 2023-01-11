@@ -997,7 +997,8 @@
 			}
 
 			function random() {
-				set(Math.floor(Math.random() * topics.length));
+				selected = Math.floor(Math.random() * topics.length);
+				set(selected);
 				justRandomized = true;
 			}
 
@@ -1015,6 +1016,9 @@
 			}
 
 			function next() {
+				if (justRandomized) {
+					justRandomized = false;
+				}
 				if (selected + 1 <= topics.length) {
 					selected++;
 				} else {
