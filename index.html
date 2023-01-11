@@ -14,9 +14,14 @@
 		<style>
 			body,
 			html {
-				width: 100vw;
 				height: 100vh;
 				background: #0d1117;
+			}
+			body,
+			html,
+			span,
+			#links {
+				width: 100vw;
 			}
 			body {
 				background-size: cover;
@@ -25,7 +30,6 @@
 			span {
 				background: #000;
 				color: #4c4c4c;
-				width: 100vw;
 				border-bottom: solid 2px #181818;
 				font-size: 8pt;
 				display: block;
@@ -97,7 +101,6 @@
 				color: #3b526d;
 			}
 			button {
-				justify-content: center;
 				width: 100%;
 				font-size: 7vw;
 				height: 100%;
@@ -127,7 +130,6 @@
 			#links {
 				height: 4vh;
 				bottom: 15vh;
-				width: 100vw;
 				line-height: 4vh;
 				position: absolute;
 				text-align: center;
@@ -580,7 +582,6 @@
 				'Vågar du ta in sexleksaker till sovrummet?',
 				'Längtar du till jobbet?',
 				'Kan man lita på dig?',
-				'Hur många sexleksaker äger du?',
 				'Vilken längd hade den kortaste personen du varit med? Allt före gymnasiet räknas inte.',
 				'Vad väger mest, ett kilo fjädrar eller ett kilo tegelstenar?',
 				'Minns du verkligen hur det var att stå ut med kvalitén av en DVD-film?',
@@ -594,6 +595,7 @@
 				'Det regnar, du är ful och det är ensamt. Vad gör du?',
 				'Du fick 50 000 SEK, vad går pengarna åt till?',
 				'Tittar du fortfarande på Kalle Anka på julafton?',
+				'Vågar du gå ut utan broddar?',
 				'Bor du hellre i lägenhet, hus eller på en gård?',
 				'Sonic eller Mario?',
 				'Bästa stället att bo på?',
@@ -615,7 +617,7 @@
 				'Äger du en bil?',
 				'Spelar du spel?',
 				'Hur länge sover hästar? - Tills de vaknar.',
-				'Kan man ha relationer som inte blir sexuella?',
+				'Kan man ha romantiska relationer som inte blir sexuella?',
 				'Skicka en fråga till 5 personer, be dem "Berätta om 3 styrkor jag har.". Prata nu med din bästa vän om dessa stämmer och vad ni känner om svaren.',
 				'Skulle du beskriva dig själv som en extro- eller introvert?',
 				'Vid vilken ålder lärde du dig simma?',
@@ -670,7 +672,7 @@
 				'Cykel, gå eller moped, vilken är bättre?',
 				'Visste du att många män känner att de får för lite komplimanger?',
 				'Vad vill du att andra ska märka om dig?',
-				'Om ni inte har sex regelbundet - är det ett problem?',
+				'Om ni inte har sex regelbundet i en relation - är det ett problem?',
 				'Är flirtande otrohet?',
 				'Vad tycker du om personer som du pratar med om ett ämne och svarar på din fråga eller ämne, men inte frågar något tillbaka?',
 				'Dealbreaker i en relation?',
@@ -771,7 +773,6 @@
 				'Sämsta kvalitén hos en person är?',
 				'Vad är det mest attraktiva med din partner?',
 				'Hur stora är dina fasta utgifter månadsvis?',
-				'I diameter, hur många meter är din favorit sexleksak?',
 				'Har du någonsin brutit mot lagen? Vad gjorde du?',
 				'Vad är det värsta en människa kan göra?',
 				'En splitter ny bil, ett nybyggt hus enligt dina önskemål eller en familj, vilken väljer du?',
@@ -915,7 +916,6 @@
 				'Skickar du naken/lättklädda bilder till folk?',
 				'Vid vilken ålder blev du av med oskulden?',
 				'Är storlek viktigt?',
-				'Du ska ha sex med någon, kuken ser ut som en parantes, vad gör du?',
 				'Är att duscha bättre eller sämre än att bada?',
 				'Du får tio miljarder kronor, du är ekonomiskt oberoende för resten av ditt liv såvida du inte byter livsstandard. Hur kommer dina närmaste år se ut?',
 				'En nära kompis till dig har hamnat hos kronofogden, hjälper du dem?',
@@ -939,7 +939,7 @@
 				'Har du någonsin varit med en vuxen person som gillat axe?',
 				'Vilken är den konstigaste plats du haft sex på?',
 				'När anser du att man blir oskuld igen?',
-				'Är antalet sexpartner viktigt för dig?',
+				'Är antalet sexpartner din potentiella partner haft viktigt för dig?',
 				'Är du öppen sexuellt för andra ställningar och fetischer?',
 				'Det läskigaste någon gjort under en sexakt?',
 				'Skulle du ligga med en person bara för att få dem att sluta fråga om sex?',
@@ -959,8 +959,6 @@
 				'Du matchar med någon på Tinder/Badoo/kallaDetVadFanDuVill, tar du initiativ eller väntar du?',
 				'Blir du lätt kall?',
 				'Är mysa/gulla ihop på soffan bättre än sex?',
-				'Den värsta sexupplevelsen?',
-				'Du är med en ny person, du märker att personen vill ha sex, men du vill inte. Kan du säga nej?',
 				'Anser du att du är otrevlig om du säger nej?',
 				'Överst eller underst?',
 			];
@@ -971,20 +969,25 @@
 		<span>Inget på denna sida får tas på allvar.</span>
 		<h1 id="container"></h1>
 		<div id="links">
-			<a href="https://mrhoffmann.github.io///?topic=" id="link"></a>
+			<a href="" id="link"></a>
 		</div>
 		<div id="buttons">
 			<div id="wrapper">
-				<button onclick="prev()" id="prev" aria-label="Förra" title="Förra">
+				<button onclick="question()" id="prev" aria-label="Förra" title="Förra">
 					<
 				</button>
 				<button
-					onclick="random()"
+					onclick="set(getRand())"
 					id="rand"
 					aria-label="Slumpa"
 					title="Slumpa"
 				></button>
-				<button onclick="next()" id="next" aria-label="Nästa" title="Nästa">
+				<button
+					onclick="question(1)"
+					id="next"
+					aria-label="Nästa"
+					title="Nästa"
+				>
 					>
 				</button>
 			</div>
@@ -999,13 +1002,13 @@
 						retval.push(sorted_arr[i]);
 					}
 				}
-				return retval.length > 0 ? retval : 0;
+				return retval;
 			};
+			const getRand = () => Math.floor(Math.random() * topics.length);
 			const duplicates = findDuplicates(topics);
-
 			if (duplicates.length > 0) console.log('dubbletter finns', duplicates);
 
-			function parseParam(query) {
+			const parseParam = (query) => {
 				var retval = undefined;
 				window.location.search.split('&').forEach(function (elem) {
 					elem = elem.replace('?', '');
@@ -1014,55 +1017,45 @@
 					}
 				});
 				return retval;
-			}
+			};
 
-			function init() {
-				let values = parseParam('topic');
-				if (typeof values != 'undefined') {
-					if (typeof values[1] == 'number') {
-						if (values[1] >= 0 && values[1] <= topics.length) {
-							selected = values[1];
-						}
+			function question(toggle) {
+				if (toggle == 1) {
+					if (selected + 1 < topics.length) {
+						set(selected + 1);
+					} else {
+						set(0);
 					}
 				} else {
-					selected = Math.floor(Math.random() * topics.length);
+					if (selected - 1 >= 0) {
+						set(selected - 1);
+					} else {
+						set(topics.length - 1);
+					}
 				}
-				set(selected);
-			}
-
-			function random() {
-				selected = Math.floor(Math.random() * topics.length);
-				set(selected);
-			}
-
-			function prev() {
-				if (selected - 1 >= 0) {
-					selected--;
-				} else {
-					selected = topics.length - 1;
-				}
-				set(selected);
-			}
-
-			function next() {
-				if (selected + 1 < topics.length) {
-					selected++;
-				} else {
-					selected = 0;
-				}
-				set(selected);
 			}
 
 			function set(position) {
+				selected = position;
 				document.getElementById('container').innerHTML = topics[position];
-				document.getElementById('link').innerHTML = `${position}/${
-					topics.length - 1
+				document.getElementById('link').innerHTML = `${position + 1}/${
+					topics.length
 				}`;
 				document.getElementById(
 					'link'
 				).href = `https://mrhoffmann.github.io?topic=${position}`;
 			}
-			init();
+
+			let values = parseParam('topic');
+			if (typeof values != 'undefined') {
+				if (typeof values[1] == 'number') {
+					if (values[1] >= 0 && values[1] <= topics.length - 1) {
+						set(values[1]);
+					}
+				}
+			} else {
+				set(getRand());
+			}
 		</script>
 	</body>
 </html>
