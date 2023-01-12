@@ -65,6 +65,11 @@
 					font-size: 3vw;
 				}
 			}
+			@media (min-width: 2400px) {
+				h1 {
+					font-size: 2vw;
+				}
+			}
 			h1 {
 				font-family: 'Roboto', sans-serif;
 				width: 80%;
@@ -406,7 +411,6 @@
 				'Filmer som gjordes förr var bättre?',
 				'Hur gammal var du när du lärde dig att simma?',
 				'När tog du en promenad senast?',
-				'Du bor i Svenstavik, vad hittar du på då?',
 				'Visste du att det längsta mellanrummet mellan födseln mellan trillingar där en av de 3 föddes 18 dagar ifrån de andra?',
 				'Vilket land besökte du senast?',
 				'Visste du att du kan få i dig tillräckligt med vitaminer, mineraler, protein, kolhydrater och fett utan att behöva äta kött?',
@@ -1048,6 +1052,55 @@
 			</div>
 		</div>
 
-		<script>const findDuplicates=e=>{let t=e.slice().sort(),n=[];for(let l=0;l<t.length-1;l++)t[l+1]==t[l]&&n.push(t[l]);return n},getRand=()=>Math.floor(Math.random()*topics.length),duplicates=findDuplicates(topics);duplicates.length>0&&console.log("dubbletter finns",duplicates);const parseParam=e=>{var t=void 0;return window.location.search.split("&").forEach(function(n){(n=n.replace("?","")).split("=")[0]==e&&(t=[n.split("=")[0],Math.floor(n.split("=")[1])])}),t};function question(e){1==e?selected+1<topics.length-1?set(selected+1):set(1):selected-1>0?set(selected-1):set(topics.length-1)}function set(e){e<1&&(e=topics.length-1),document.getElementById("container").innerHTML=topics[e],document.getElementById("link").innerHTML=`${e}/${topics.length-1}`,document.getElementById("link").href=`https://mrhoffmann.github.io?topic=${e}`,selected=e}let values=parseParam("topic");void 0!==values?"number"==typeof values[1]&&values[1]>0&&values[1]<=topics.length&&(selected=values[1]):selected=getRand(),set(selected);</script>
+		<script>
+			const findDuplicates = (e) => {
+					let t = e.slice().sort(),
+						n = [];
+					for (let l = 0; l < t.length - 1; l++)
+						t[l + 1] == t[l] && n.push(t[l]);
+					return n;
+				},
+				getRand = () => Math.floor(Math.random() * topics.length),
+				duplicates = findDuplicates(topics);
+			duplicates.length > 0 && console.log('dubbletter finns', duplicates);
+			const parseParam = (e) => {
+				var t = void 0;
+				return (
+					window.location.search.split('&').forEach(function (n) {
+						(n = n.replace('?', '')).split('=')[0] == e &&
+							(t = [n.split('=')[0], Math.floor(n.split('=')[1])]);
+					}),
+					t
+				);
+			};
+			function question(e) {
+				1 == e
+					? selected + 1 < topics.length - 1
+						? set(selected + 1)
+						: set(1)
+					: selected - 1 > 0
+					? set(selected - 1)
+					: set(topics.length - 1);
+			}
+			function set(e) {
+				e < 1 && (e = topics.length - 1),
+					(document.getElementById('container').innerHTML = topics[e]),
+					(document.getElementById('link').innerHTML = `${e}/${
+						topics.length - 1
+					}`),
+					(document.getElementById(
+						'link'
+					).href = `https://mrhoffmann.github.io?topic=${e}`),
+					(selected = e);
+			}
+			let values = parseParam('topic');
+			void 0 !== values
+				? 'number' == typeof values[1] &&
+				  values[1] > 0 &&
+				  values[1] <= topics.length &&
+				  (selected = values[1])
+				: (selected = getRand()),
+				set(selected);
+		</script>
 	</body>
 </html>
