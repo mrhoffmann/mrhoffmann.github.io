@@ -1246,6 +1246,20 @@
 				questions.doFilterSearch(event);
 				inputText.style.width = inputText.value.length + 'ch';
 			});
+
+			document.addEventListener('keydown', function (event) {
+				switch (event.key) {
+					case 'n':
+						questions.increment();
+						break;
+					case 'p':
+						questions.decrement();
+						break;
+					case 'r':
+						questions.randomize();
+						break;
+				}
+			});
 		</script>
 	</body>
 </html>
