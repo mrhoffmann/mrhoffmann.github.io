@@ -1309,18 +1309,6 @@
 			document.addEventListener('keydown', function (event) {
 				if (event.ctrlKey && event.code === 'KeyC') {
 					copy();
-				} else {
-					switch (event.key) {
-						case 'n':
-							questions.increment();
-							break;
-						case 'p':
-							questions.decrement();
-							break;
-						case 'r':
-							questions.randomize();
-							break;
-					}
 				}
 			});
 		</script>
