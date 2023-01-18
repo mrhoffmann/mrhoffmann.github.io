@@ -1162,7 +1162,6 @@
 					const element = document.getElementById('link');
 					document.getElementById('container').innerHTML =
 						this.topics[this.counter];
-					console.log(this.length);
 					element.innerHTML = `${this.length == 0 ? 1 : this.counter} / ${
 						this.length + 1
 					}`;
@@ -1217,11 +1216,11 @@
 						this.aliveNotifications--;
 					}, 2100);
 				};
-				doFilterSearch = (event) => {
-					this._searchWord = event.target.value;
+				doFilterSearch = (parm) => {
+					this._searchWord = parm;
 					try {
 						this.topics = this._shadowTopics.filter((x) =>
-							new RegExp(event.target.value, 'gmdi').test(x)
+							new RegExp(parm, 'gmdi').test(x)
 						);
 					} catch {
 						//do nothing luls :)
@@ -1275,7 +1274,10 @@
 			const questions = new Selected();
 			const inputText = document.getElementById('filter');
 			const parm = questions.parseParam('question');
-			inputText.value = parm != null ? parm : '';
+			if (parm != null) {
+				inputText.value = parm != null ? parm : '';
+				questions.doFilterSearch(parm);
+			}
 			const copy = () => {
 				const container = document.getElementById('container');
 				const textToCopy = container.innerText;
@@ -1294,7 +1296,7 @@
 			};
 
 			inputText.addEventListener('input', (event) => {
-				questions.doFilterSearch(event);
+				questions.doFilterSearch(event.target.value);
 				inputText.style.width = inputText.value.length + 'ch';
 			});
 
