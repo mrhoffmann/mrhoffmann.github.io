@@ -1171,13 +1171,14 @@
 					}${this.searchWord}`;
 				}
 				updateDisplay() {
+					if (this.length === 0) this.counter = 0;
 					if (this.length >= 0) {
 						document.getElementById('container').classList.remove('hidetext');
 						document.getElementById('link').classList.remove('hidetext');
 					}
 
 					this.updateLink();
-					if (this.length == 0) {
+					if (this.length == -1) {
 						document.getElementById('container').classList.add('hidetext');
 						document.getElementById('link').classList.add('hidetext');
 					}
