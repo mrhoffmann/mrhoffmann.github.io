@@ -16,6 +16,7 @@
 			html {
 				height: 100vh;
 				background: #0d1117;
+				overflow: hidden;
 			}
 			span,
 			#links,
@@ -73,15 +74,12 @@
 				width: 80%;
 				margin: 0 10%;
 				text-align: center;
-				height: 56vh;
+				height: 60vh;
 				padding-top: 15vh;
 				color: #adbac7;
 			}
 			#buttons {
-				position: absolute;
-				bottom: 0;
-				left: 0;
-				right: 0;
+				width: 100vw;
 				color: #000;
 				height: 15vh;
 			}
@@ -1162,6 +1160,7 @@
 					const element = document.getElementById('link');
 					document.getElementById('container').innerHTML =
 						this.topics[this.counter];
+					console.log(this.length);
 					element.innerHTML = `${this.length == 0 ? 1 : this.counter} / ${
 						this.length + 1
 					}`;
@@ -1218,6 +1217,7 @@
 				};
 				doFilterSearch = (parm) => {
 					this._searchWord = parm;
+					console.log(parm);
 					try {
 						this.topics = this._shadowTopics.filter((x) =>
 							new RegExp(parm, 'gmdi').test(x)
