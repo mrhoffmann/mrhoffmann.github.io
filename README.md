@@ -1,4 +1,4 @@
-# Vad i helvete ska jag prata om?! | What the fuck should i talk about?
+# Vad ska jag prata om?! | What should i talk about?
 
 
 ## SWE
