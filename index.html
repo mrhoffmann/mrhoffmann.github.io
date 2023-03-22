@@ -33,7 +33,7 @@
 				height: 2vh;
 				line-height: 2vh;
 			}
-			span:hover {
+			h1:hover,span:hover {
 				cursor: pointer;
 				color: #f4f4f4;
 				opacity: 0.6;
@@ -1274,11 +1274,11 @@
 	</head>
 
 	<body>
-		<span onclick="copy()"
+		<span
 			>Inget på denna sida får tas på allvar. "visste du" kan vara
 			utdaterat.</span
 		>
-		<h1 id="container"></h1>
+		<h1 id="container" onclick="copy()"></h1>
 		<div id="input-wrapper">
 			<input type="text" id="filter" autocomplete="off" placeholder="Sök" />
 		</div>
