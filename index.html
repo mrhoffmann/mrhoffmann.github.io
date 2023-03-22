@@ -1243,8 +1243,10 @@
 				};
 				updateLink(target) {
 					const element = document.getElementById('link');
+					const newData = this.topics[this.counter -1];
 					document.getElementById('container').innerHTML =
-						this.topics[this.counter -1];
+						newData;
+					document.querySelector('meta[name="description"]').setAttribute("content", newData);
 					element.innerHTML = `${this.length == 0 ? 1 : this.counter} / ${
 						this.length
 					}`;
