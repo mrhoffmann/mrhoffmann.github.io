@@ -174,11 +174,6 @@
 						: this.randomize(),
 						this.updateDisplay();
 					this.findDuplicates();
-					if(this.parseParam("topic") === undefined){
-						this.randomize();
-					} else {
-						this.counter = this.parseParam("topic");
-					}
 				}
 
 				findDuplicates() {
@@ -1352,7 +1347,11 @@
 			});
 
 			(function() {
-				
+				if(questions.parseParam("topic") === undefined){
+					questions.randomize();
+				} else {
+					questions.counter = Number(questions.parseParam("topic"));
+				}
 			})();
 		</script>
 	</body>
