@@ -1392,8 +1392,14 @@
 				if(questions.parseParam("topic") === undefined){
 					questions.randomize();
 				} else {
-					questions.counter = Number(questions.parseParam("topic"));
-					questions.updateDisplay();
+					let value = questions.parseParam("topic");
+					if(value.length > 0){
+						questions.counter = Number(questions.parseParam("topic"));
+						questions.updateDisplay();
+					}
+					else{
+						questions.randomize();
+					}
 				}
 			})();
 		</script>
