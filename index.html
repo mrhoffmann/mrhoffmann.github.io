@@ -466,6 +466,7 @@
 					'Känner du att det är viktigt att rätta folk som säger fel?',
 					'Går du på medicin?',
 					'Är grammatik viktigt?',
+					'Vilket är det bästa sällskapsspelet?',
 					'Skicka en snap till 3 personer, be varje om att få "Kan du beskriva mig med ett ord?".',
 					'Vad är den billigaste godaste maträtten?',
 					'När lämnade du blodprov senast?',
@@ -1203,7 +1204,7 @@
 				updateLink(target) {
 					const element = document.getElementById('link');
 					document.getElementById('container').innerHTML =
-						this.topics[this.counter];
+						this.topics[this.counter -1];
 					element.innerHTML = `${this.length == 0 ? 1 : this.counter} / ${
 						this.length
 					}`;
