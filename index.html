@@ -164,10 +164,15 @@
 		</style>
 		<script>
 			class Selected {
+				counter = 1;
+				aliveNotifications = 0;
+				_shadowTopics = [];
+				_searchWord = '';
+
 				constructor() {
 					this.topics.push('Här är slutet, testa klicka på slumpa?');
 					this._shadowTopics = this.topics;
-					let values = Math.floor(this.parseParam('topic'));
+					let values = Math.floor(Number(this.parseParam('topic')));
 					void 0 !== values
 						? 'number' == typeof values[1] &&
 						  values[1] > 0 &&
@@ -186,10 +191,6 @@
 
 					n.length > 0 && console.log(n);
 				}
-				counter = 1;
-				aliveNotifications = 0;
-				_shadowTopics = [];
-				_searchWord = '';
 				get searchWord() {
 					const retval =
 						this._searchWord.length > 0
@@ -199,6 +200,16 @@
 				}
 				set searchWord(value) {
 					this._searchWord = value;
+				}
+				set counter(value) {
+					this.counter += value;
+					this.updateDisplay();
+				}
+				get counter() {
+					return this.counter;
+				}
+				get length() {
+					return this.topics.length;
 				}
 				topics = [
 					'Vilka språk kan du?',
@@ -1009,6 +1020,7 @@
 					'Favorittårta?',
 					'Föredrar du en lugn och samlad person eller en med agressiva tendenser?',
 					'Bäst pålägg på mackan?',
+					'Är du duktig på historia?',
 					'Ljusa eller mörka möbler?',
 					'Det är helg, du har pengar över, vad är det du vill hitta på?',
 					'Du får välja en grej på en person som du ska börja dejta helt fritt, vad väljer du att den personen ska ha?',
@@ -1078,6 +1090,7 @@
 					'Vilken var den senaste konserten eller liveframträdandet du var på?',
 					'Har du några semestertraditioner eller favorittyper av resor?',
 					'Vilket är det mest intressanta stället du någonsin varit på?',
+					'Pacemaker är en svensk uppfinning.',
 					'Har du någon gång gjort något volontärarbete eller samhällstjänst?',
 					'Vilken var den senaste boken du läste?',
 					'Påverkades du starkt av Covid-19?',
@@ -1150,15 +1163,16 @@
 					'Är du en spänningssökare eller föredrar du en lugnare livsstil?',
 					'Vilka är dina favoritcitat eller ordspråk?',
 					'Har du några syskon?',
+					'Visste du att Volvo uppfann trepunktsbältet som används i nästan alla bilar idag?',
 					'Har du någonsin gjort något volontärarbete?',
 					'Vilken typ av mat lagar du helst?',
 					'Vilken är den mest intressanta platsen du någonsin besökt?',
 					'Har du några husdjur?',
 					'Gillar du att resa?',
-					'Har du några favoritcitat eller ordspråk?',
 					'Har du några fobier?',
 					'Vilken skulle vara din perfekta dag?',
 					'Vilka är dina favorittyper av aktiviteter?',
+					'Zip-arkiv uppfanns av en svensk person (Gideon Sundbäck)',
 					'Vad är din favoritsak med din hemstad?',
 					'Vilken är den bästa semestern du någonsin tagit?',
 					'Vad är det viktigaste i ditt liv?',
@@ -1184,7 +1198,6 @@
 					'Vad är det mest äventyrliga du någonsin gjort?',
 					'Oroar du dig eller är du nyfiken om AI?',
 					'Har du några intressanta hobbyer eller talanger?',
-					'Vad är ditt favoritcitat eller ordspråk?',
 					'Kan du mycket om historiska personer eller händelser?',
 					'Har du någonsin lärt dig eller provat något helt nytt?',
 					'Finns det någon artist eller musiker som du följer religiöst?',
@@ -1245,16 +1258,6 @@
 					'Är att ge saker till människor ett sätt att visa kärlek?',
 					'Blickar du tillbaka på vad som varit och tänker på vad du inte hunnit eller aldrig tog initiativ att göra?',
 				];
-				set counter(value) {
-					this.counter += value;
-					this.updateDisplay();
-				}
-				get counter() {
-					return this.counter;
-				}
-				get length() {
-					return this.topics.length;
-				}
 				increment = () => {
 					this.counter++;
 					if (this.counter > this.length) this.counter = 1;
