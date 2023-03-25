@@ -1278,7 +1278,7 @@
 					element.innerHTML = `${this.length == 0 ? 1 : this.counter} / ${
 						this.length
 					}`;
-					element.href = `https://mrhoffmann.github.io?topic=${
+					element.href = document.location.origin + `?topic=${
 						this.length == 0 ? 1 : this.counter
 					}${this.searchWord}`;
 				}
@@ -1293,14 +1293,13 @@
 						//document.getElementById('container').classList.add('hidetext');
 						document.getElementById('link').classList.add('hidetext');
 					}
-					console.log(this.length);
 				}
 				updateDisplay() {
-					if (this.length === 0) this.counter = 0;
 					this.updateLink();
 					this.toggleText();
 
-					if(this.counter < 1){
+					if(this.length < 1){
+						this.counter = 0;
 						this.overrideQuestionText("Din sökning gav inget resultat.");
 					}
 				}
