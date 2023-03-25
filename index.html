@@ -364,13 +364,40 @@
 					'Har du syskon?',
 					'Samlar du på konst?',
 					'Hur länge är du vaken om dagarna?',
+					'Om du tvingas, pizza/hamburgare eller kebab?',
 					'När skurade du senast?',
 					'Linux, Windows eller MAC?',
 					'Hur mycket pengar har du på kontot just nu?',
-					'Hur mycket är mycket pengar att spendera på en gång?',
 					'Klarar du av personer som inte använder deo?',
 					'Vad är den största skulden du har?',
 					'Är du mode-medveten?',
+					'Har du någonsin uppfunnit något?',
+					'Hur mycket är mycket pengar att spendera på en gång?',
+					'När brukar du gå och lägga dig?',
+					'Föredrar du att jobba hemifrån?',
+					'Vad var ditt första jobb?',
+					'Kan du tänka dig att gå på bio ensam?',
+					'Är banan på pizza det värsta?',
+					'Är du en duktig simmare?',
+					'Kan du gå en dag utan deo?',
+					'Om du ska vara uppklädd, vad skulle du välja för utstyrsel?',
+					'Vill du hellre läsa en bok eller se en film?',
+					'Hur ofta duschar du?',
+					'Skulle du säga att du inreder bra?',
+					'Är du duktig på att komma på samtalsämnen?',
+					'Spenderar du mycket pengar på skönhetsprodukter?',
+					'Hur många gånger har du bytt frisyr?',
+					'Vilken var den första mobiltelefonen du hade?',
+					'Gillar du knäckebröd?',
+					'Hur många böcker läser du ungefär på ett år?',
+					'Vad är den längsta promenaden du tagit?',
+					'Har du en känslig mage?',
+					'Är du en pratsam person eller är du hellre en som lyssnar?',
+					'Bär du hellre slips eller fluga?',
+					'Brukar du byta telefon för att du har sönder din?',
+					'Vart handlar du?',
+					'Är du en person som veckohandlar?',
+					'Har du glasögon?',
 					'Stör dina grannar dig?',
 					'Favorit-leksak när du växte upp?',
 					'Har du någonsin vunnit på lotto?',
@@ -747,6 +774,7 @@
 					'När hade du kul senast?',
 					'Vilken är den godaste chokladen?',
 					'Är nötter gott eller överhypeat?',
+					'Har du en diagnos?',
 					'Är smink viktigt?',
 					'Vad är det nördigaste du vet?',
 					'Bästa boken du läst?',
@@ -1254,17 +1282,26 @@
 						this.length == 0 ? 1 : this.counter
 					}${this.searchWord}`;
 				}
-				updateDisplay() {
-					if (this.length === 0) this.counter = 0;
-					if (this.length >= 0) {
+				overrideQuestionText(text){
+					document.getElementById('container').innerHTML = text;
+				}
+				toggleText(){
+					if (this.length >= 1) {
 						document.getElementById('container').classList.remove('hidetext');
 						document.getElementById('link').classList.remove('hidetext');
-					}
-
-					this.updateLink();
-					if (this.length == -1) {
-						document.getElementById('container').classList.add('hidetext');
+					} else {
+						//document.getElementById('container').classList.add('hidetext');
 						document.getElementById('link').classList.add('hidetext');
+					}
+					console.log(this.length);
+				}
+				updateDisplay() {
+					if (this.length === 0) this.counter = 0;
+					this.updateLink();
+					this.toggleText();
+
+					if(this.counter < 1){
+						this.overrideQuestionText("Din sökning gav inget resultat.");
 					}
 				}
 				parseParam = (e) => {
@@ -1307,6 +1344,10 @@
 						this.topics = this._shadowTopics.filter((x) =>
 							new RegExp(parm, 'gmdi').test(x)
 						);
+						if(this.topics.length > 0)
+						{
+							this.counter = 1;
+						}
 					} catch {
 						//do nothing luls :)
 					}
