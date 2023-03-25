@@ -20,7 +20,7 @@
 			utdaterat.</span
 		>
 		<h1 id="container" onclick="copy()"></h1>
-		<div id="unsafe_container"><input type="checkbox" id="unsafe"></input><label for="unsafe" id="unsafe_text">Inkludera NSFW</label></div>
+		<div id="unsafe_container"><input type="checkbox" id="unsafe" onclick="unsafe_check(this)"></input><label for="unsafe" id="unsafe_text">Inkludera NSFW</label></div>
 		<div id="input-wrapper">
 			<input type="text" id="filter" autocomplete="off" placeholder="Sök" />
 		</div>
@@ -57,6 +57,7 @@
 		<script src="js.js"></script>
 		<script>
 			const questions = new Selected();
+			const originalTopics = questions.topics;
 			const inputText = document.getElementById('filter');
 			const parm = questions.parseParam('question');
 			if (parm != null) {
@@ -88,6 +89,11 @@
 					copy();
 				}
 			});
+
+			const unsafe_check = (event) => {
+				questions.topics = event.checked ? originalTopics.concat(questions.sensitive_topis) : originalTopics;
+				questions.updateDisplay();
+			}
 
 			(function() {
 				if(questions.parseParam("topic") === undefined){
