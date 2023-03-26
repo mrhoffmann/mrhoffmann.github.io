@@ -123,6 +123,7 @@ class Selected {
         'Visste du att kroppen har 206 ben i skelettet?',
         'Vilken är din favorit-subreddit?',
         'Heter det buntband eller kattstrypare?',
+        'Vad väger mest, ett kilo fjädrar eller ett kilo tegelstenar?',
         'Är du en organiserad person?',
         'Kan man ha relationer som inte blir sexuella?',
         'Vad är din definition av barnsligt?',
