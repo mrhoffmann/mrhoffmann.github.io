@@ -15,14 +15,11 @@
 	</head>
 
 	<body>
-		<span
-			>Inget på denna sida får tas på allvar. "visste du" kan vara
-			utdaterat.</span
-		>
+		<span>Inget på denna sida får tas på allvar. "visste du" kan vara utdaterat.</span>
 		<h1 id="container" onclick="copy()"></h1>
-		<div id="unsafe_container"><input type="checkbox" id="unsafe" onclick="unsafe_check(this)"></input><label for="unsafe" id="unsafe_text">Inkludera NSFW</label></div>
+		<div id="unsafe_container"><input type="checkbox" id="unsafe" onclick="unsafe_check(this)"></input><label for="unsafe" id="unsafe_text">Inkludera känsliga frågor</label></div>
 		<div id="input-wrapper">
-			<input type="text" id="filter" autocomplete="off" placeholder="Sök" />
+			<input type="text" id="filter" autocomplete="off" placeholder="Sök"><span id="clear_search" onclick="clearSearch()">clear</span></input>
 		</div>
 		<div id="links">
 			<a href="" id="link"></a>
@@ -58,12 +55,7 @@
 		<script>
 			const questions = new Selected();
 			const originalTopics = questions.topics;
-			const inputText = document.getElementById('filter');
-			const parm = questions.parseParam('question');
-			if (parm != null) {
-				inputText.value = parm != null ? parm : '';
-				questions.doFilterSearch(parm);
-			}
+			
 			const copy = () => {
 				const textarea = document.createElement('textarea');
 				textarea.value = document.getElementById('container').innerText;
@@ -79,41 +71,30 @@
 				document.body.removeChild(textarea);
 			};
 
-			inputText.addEventListener('input', (event) => {
-				questions.doFilterSearch(event.target.value);
-				inputText.style.width = inputText.value.length + 'ch';
-			});
-
-			document.addEventListener('keydown', function (event) {
-				if (event.ctrlKey && event.code === 'KeyC') {
-					copy();
-				}
-			});
-
 			const unsafe_check = (event) => {
 				questions.topics = event.checked ? originalTopics.concat(questions.sensitive_topis) : originalTopics;
+				questions.nsfw = event.checked;
 				if(event.checked){
-					questions.counter = originalTopics.length + 1;
-				}else{
+					if(!questions.searching)
+					{
+						questions.counter = originalTopics.length + 1;
+					}
+				}
+				if(!questions.searching){
 					questions.randomize();
+				}
+				else{
+					questions.doFilterSearch(questions.searchWord);
 				}
 				questions.updateDisplay();
 			}
 
-			(function() {
-				if(questions.parseParam("topic") === undefined){
-					questions.randomize();
-				} else {
-					let value = questions.parseParam("topic");
-					if(value.length > 0){
-						questions.counter = Number(questions.parseParam("topic"));
-						questions.updateDisplay();
-					}
-					else{
-						questions.randomize();
-					}
-				}
-			})();
+			const clearSearch = () => {
+				document.getElementById('filter').value = "";
+				questions.doFilterSearch("");
+			}
+
+			questions.initializeComponent();
 		</script>
 	</body>
 </html>

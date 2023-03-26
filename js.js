@@ -1,8 +1,10 @@
 class Selected {
+    nsfw = false;
     counter = 1;
     aliveNotifications = 0;
-    _shadowTopics = [];
-    _searchWord = '';
+    searching = false;
+    shadowTopics = [];
+    searchWord = '';
 
     constructor() {
         this._shadowTopics = this.topics;
@@ -50,11 +52,11 @@ class Selected {
         'Skulle doften av en person få dig att vägra sex?',
         'Är religion viktigt?',
         'Spelar bröststorlek någon roll?',
+        'Beskriv din värsta upplevelse med en partner.',
         'Har du haft sex i ett badkar/en dush?',
         'Har du någonsin haft sex i en säng som inte är din?',
         'Har du haft sex på en toalett?',
         'På en skala mellan 1-10, hur snygg måste en person vara för att du ska ha sex med dem?',
-        'Bryr du dig om storleken på en killes kuk, någon roll? Ska den vara stor, medel eller liten?',
         'Visste du att en mans könsorgan kan regleras i storlek beroende på hur kåt han är?',
         'Vilken är den konstigaste plats du haft sex på?',
         'Hur brukar det kännas för dig att ta intiativ till sex? Tycker du det är lätt eller svårt?',
@@ -62,9 +64,11 @@ class Selected {
         'Vad tycker du bäst om när det gäller "förspel" (t.ex. kramar, kyssar och smekningar)?',
         'Vad kan man göra för att ge dig maximal njutning?',
         'Vad innebär "bra sex" för dig?',
+        'Bryr du dig om storleken på en killes, någon roll? Ska den vara stor, medel eller liten?',
         'Vad får dig att känna dig sensuell?',
         'Vad är din syn på sexuella rollspel?',
         'Har du några fetisher?',
+        'Vad är det dummaste du gjort mot en vän?',
         'Kan du känna prestationspress när du har sex?',
         'Vad brukar göra att du inte blir sugen på sex?',
         'Vilka kläder tycker du är sexiga?',
@@ -88,6 +92,7 @@ class Selected {
         'Vilka faktorer brukar påverka om du har lätt eller svårt att få orgasm?',
         'När fick du din första kyss?',
         'Hur ofta tycker du om att ha sex?',
+        'Skulle du kunna bryta mot lagen?',
         'Vad blir du avtänd på?',
         'Har du någonsin haft en sexuell fantasi Om mig?',
         'Har du en sexfantasi?',
@@ -100,16 +105,25 @@ class Selected {
         'Hur vet man att du är glad?',
         'Hur lätt är det att göra dig arg?',
         'Vilket är bäst, pizza, hamburgare eller kebab?',
+        'Har du någonsin fått en böter?',
+        'Vem gav dig ditt smeknamn?',
         'Är Beck en bra serie?',
-        'Vad är det mest löjliga du har övertygat om att någon är sant?',
+        'Känner du någon tidspress, som om du har för lite tid?',
         'Har du haft något husdjur?',
+        'Beskriv det mest negativa med att känna dig.',
+        'Bör man diskutera privata saker som kärlek, politik och pengar med kollegor/bekanta?',
+        'Vad är det mest löjliga du har övertygat om att någon är sant?',
         'Har du någon gång haft något smeknamn? Vem kom på namnet?',
         'När skrattade du senaste så mycket så du började gråta?',
         'Vad är det konstigaste du någonsin gjort när du var liten?',
+        'Berätta en hemlighet om dig själv.',
+        'Fria tyglar, du har inga ansvar eller begränsningar imorgon, vad skulle du vilja göra?',
         'Vilken är din konstigaste dröm?',
+        'Vilken är den vanligaste missbedömningen folk gör om dig?',
         'Vad var det mest pinsamma ögonblicket i ditt liv?',
         'Skulle du hellre kyssa en kobra eller kyssa en skorpion?',
         'Vad är det konstigaste du ätit?',
+        'Hur skulle du vilja bli sedd?',
         'Vilken serie hade du helst vilja va en del av?',
         'Vad är den värsta matkombinationen du kan föreställa dig?',
         'Vilket är ditt lyckligaste tillfälle i ditt liv?',
@@ -118,12 +132,13 @@ class Selected {
         'Vad är det vackraste ordet för dig?',
         'Tycker du det är attraktivt att vara helrakad på huvudet?',
         'Vad skulle ge för namn till din egna biografi?',
+        'Vad är det värsta du gjort mot någon?',
         'Vilket land var det första du reste till?',
         'Vad är den mest behagliga accenten att höra ditt språk prata med?',
         'Vilka typer av människor har du svårt för?',
         'Vad är det bästa rådet din mormor någonsin har gett dig?',
         'Snabbaste eller starkare personen i världen, vad hade du valt?',
-        'När du var liten – vad trodde du var det bästa med att vara vuxen då?',
+        'När du var liten - vad trodde du var det bästa med att vara vuxen då?',
         'Vad är det du ännu gillar, men som du kanske är för gammal för?',
         'Var är ditt drömresmål?',
         'Vad kan stressa upp dig, trots att det inte är en så storgrej egentligen?',
@@ -149,6 +164,7 @@ class Selected {
         'Kan du hålla dig från att spy om du ser någon annan göra det? Låtsas som om de gjorde det precis intill dig.',
         'Gillar du fotboll?',
         'Tycker du om sköldpaddor?',
+        'Har du en bucketlist?',
         'Vilken är den bästa såsen?',
         'Går bilen bra?',
         'Säger man Bepsi, Pespi eller Pepsi?',
@@ -425,7 +441,7 @@ class Selected {
         'I vilken stad hade du helst bott i?',
         'Kan du lösa talet?<br>2x-5=15',
         'Vad saknar appar som Tinder och Badoo?',
-        'Är längden (inte kuken) på en kille viktig?',
+        'Är en killes längd viktig?',
         'Känner du att det är viktigt att rätta folk som säger fel?',
         'Går du på medicin?',
         'Är grammatik viktigt?',
@@ -1178,18 +1194,16 @@ class Selected {
         this.counter = Math.floor(Math.random() * this.length) + 1;
         this.updateDisplay();
     };
-    updateLink(target) {
+    updateLink() {
         const element = document.getElementById('link');
         const newData = this.topics[this.counter -1];
-        document.getElementById('container').innerHTML =
-            newData;
+        const currentIndex = this.length == 0 ? 1 : this.counter;
+        document.getElementById('container').innerHTML = newData;
         document.querySelector('meta[name="description"]').setAttribute("content", newData);
-        element.innerHTML = `${this.length == 0 ? 1 : this.counter} / ${
-            this.length
-        }`;
-        element.href = document.location.origin + `?topic=${
-            this.length == 0 ? 1 : this.counter
-        }${this.searchWord}`;
+        element.innerHTML = `${currentIndex} / ${this.length}`;
+        element.href = document.location.origin + `?topic=${currentIndex}`;
+        element.href += this.nsfw ? '&nsfw' : '';
+        element.href += this.searching ? '&question='+this.searchWord : '';
     }
     overrideQuestionText(text){
         document.getElementById('container').innerHTML = text;
@@ -1240,16 +1254,26 @@ class Selected {
         }px)`;
         setTimeout(() => {
             notification.classList.add('fadeOut');
-        }, 2000);
+        }, 900);
         setTimeout(() => {
             document.body.removeChild(notification);
             this.aliveNotifications--;
         }, 2100);
     };
+    invalidateSearch = () => {
+        this.searchWord = "";
+        this.searching = false;
+        this.updateDisplay();
+    }
     doFilterSearch = (parm) => {
-        this._searchWord = parm;
+        const target = document.getElementById("filter");
+        target.style.width = target.value.length + 'ch';
+        this.searchWord = parm;
+        this.searching = this.searchWord.length > 0;
         try {
-            this.topics = this._shadowTopics.filter((x) =>
+            this.topics = !this.nsfw ? this._shadowTopics.filter((x) =>
+                new RegExp(parm, 'gmdi').test(x)
+            ) : this._shadowTopics.concat(this.sensitive_topis).filter((x) =>
                 new RegExp(parm, 'gmdi').test(x)
             );
             if(this.topics.length > 0)
@@ -1261,4 +1285,50 @@ class Selected {
         }
         this.updateDisplay();
     };
+    addEventListeners = () => {
+        const inputText = document.getElementById('filter');
+        inputText.addEventListener('input', (event) => {
+            questions.doFilterSearch(event.target.value);
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.ctrlKey && event.code === 'KeyC') {
+                copy();
+            }
+        });
+    }
+    initializeComponent = () => {
+        if(this.parseParam("nsfw")){
+            this.nsfw = true;
+            document.getElementById('unsafe').checked = true;
+            unsafe_check({checked:true});
+        }
+        if(this.parseParam("topic") === undefined){
+            this.randomize();
+        } else {
+            let value = this.parseParam("topic");
+            if(value.length > 0){
+                this.counter = Number(this.parseParam("topic"));
+                this.updateDisplay();
+            }
+            else{
+                if(!this.searching){
+                    this.randomize();
+                }
+            }
+        }
+
+        const inputText = document.getElementById('filter');
+        const parm = questions.parseParam('question');
+        if (parm != null) {
+            inputText.value = parm != null ? parm : '';
+            questions.doFilterSearch(parm);
+        }
+
+        if(this.parseParam("question") !== undefined){
+            this.doFilterSearch(this.parseParam("question"));
+        }
+        
+        this.addEventListeners();
+    }
 }
