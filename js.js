@@ -104,7 +104,6 @@ class Selected {
         'Har du någonsin haft en sexuell fantasi om mig?',
         'Har du en sexfantasi?',
         'Vad är det du inte gillar med mig?',
-        'Vad har du för drömmar?',
         'Vad tänder du mest på under sex?',
         'Vad tänder du på?',
         'Tror du på ett liv efter detta liv?',
