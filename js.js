@@ -118,7 +118,7 @@ class Selected {
     topics = [
         'Visste du att kroppen har 206 ben i skelettet?',
         'Vilken är din favorit-subreddit?',
-        'Heter det buntband, kattstrypare eller ',
+        'Heter det buntband eller kattstrypare?',
         'Är du en organiserad person?',
         'Vad är din definition av barnsligt?',
         'Visste du att en av anledningarna att man kan vara mer trött är för att man avbryter en REM-cykel? Testa byt tid på larmet.',
