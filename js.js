@@ -87,7 +87,7 @@ class Selected {
         'Har du haft sex i en skog?',
         'Tror du att himmel och helvete finns?',
         'Gillar du quickies?',
-        'Har du någonsin minst någon nära?',
+        'Har du någonsin mist någon nära?',
         'Tycker du att jag brukar märka när du är sugen på sex? Vad kan vi göra för att jag inte ska missa dina signaler?',
         'Vad tycker du om att se varandra i ögonen under sex?',
         'Vad gillar du mest med din egen kropp?',
