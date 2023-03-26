@@ -1323,6 +1323,8 @@ class Selected {
         });
     }
     initializeComponent = () => {
+        const arr = document.lastModified.substring(0,8).split("/").reverse().join("-") + " " + document.lastModified.substring(11);
+        document.getElementById("modified").innerHTML = arr;
         if (this.parseParam("nsfw")) {
             this.nsfw = true;
             document.getElementById('unsafe').checked = true;
