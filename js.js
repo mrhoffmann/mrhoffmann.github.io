@@ -108,6 +108,7 @@ class Selected {
         'Vilka faktorer brukar påverka om du har lätt eller svårt att få orgasm?',
         'När fick du din första kyss?',
         'Hur ofta tycker du om att ha sex?',
+        'Vad fick dig att få dåligt självförtroende?',
         'Skulle du kunna bryta mot lagen?',
         'Vad blir du avtänd på?',
         'Har du sexleksaker?',
@@ -118,6 +119,7 @@ class Selected {
         'Tror du på ett liv efter detta liv?',
         'Vad hindrar dig från att göra det första steget mot din dröm?',
         'Har du någon favorit sexposition?',
+        'Vågar du ta in sexleksaker till sovrummet?',
     ];
     topics = [
         'Visste du att kroppen har 206 ben i skelettet?',
