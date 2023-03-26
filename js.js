@@ -17,6 +17,7 @@ class Selected {
             : this.randomize(),
             this.updateDisplay();
         this.findDuplicates();
+        this.topics.push('Denna sida innehåller ' + this.topics.concat(this.sensitive_topis).length + ' frågor/samtalsämnen');
     }
 
     findDuplicates() {
@@ -49,8 +50,11 @@ class Selected {
     }
     sensitive_topis = [
         'Är du troende?',
+        'Har du några fobier?',
         'Skulle doften av en person få dig att vägra sex?',
         'Är religion viktigt?',
+        'Vilket är det sexigaste yrket?',
+        'Går du på medicin?',
         'Spelar bröststorlek någon roll?',
         'Beskriv din värsta upplevelse med en partner.',
         'Har du haft sex i ett badkar/en dush?',
@@ -111,6 +115,19 @@ class Selected {
         'Har du någon favorit sexposition?',
     ];
     topics = [
+        'Visste du att en av anledningarna att man kan vara mer trött är för att man avbryter en REM-cykel? Testa byt tid på larmet.',
+        'Skulle du klara av att gå med ögonbindel i 24 vakna timmar?',
+        'Kan du vad slangen sway, woke, slay queen, simp, fr, pov eller tfw står för?',
+        'Vilka dialekter gillar du?',
+        'På en skala mellan 1-10, hur tekniskt skulle du anse dig själv vara?',
+        'Äger du en kamera?',
+        'Do you or do you not feel bonita?',
+        'Är det värt att äga en bil trots kostnaderna?',
+        'Använder du hellre Postnord eller Schenker?',
+        'Vilken är den roligaste tecknade figuren?',
+        'Kan du vicka på öronen?',
+        'Vilken mobil var din första?',
+        'Vad har du för nummer?',
         'Vilka språk kan du?',
         'Hur vet man att du är glad?',
         'Hur lätt är det att göra dig arg?',
@@ -118,9 +135,21 @@ class Selected {
         'Har du någonsin fått en böter?',
         'Vem gav dig ditt smeknamn?',
         'Är Beck en bra serie?',
+        'Kan du skillnaden på tampong, binda och trosskydd?',
         'Känner du någon tidspress, som om du har för lite tid?',
         'Har du haft något husdjur?',
         'Vad äter du som tröstmat?',
+        'Kan du vicka på näsvingarna?',
+        'Hur många mariekex tror du att du kan få plats med samtidigt i din mun utan att tugga dem?',
+        'Kan du buktala?',
+        'Säger någons färgval på kläder något om dem?',
+        'Vad heter den hemska figuren i Mumin som är iskall och fryser allt hon vidrör?',
+        'Kan du morra?',
+        'Är du en intressant person?',
+        'Har du en favoritdrink?',
+        'Hur många larm har du?',
+        'Vill du ta en fika med mig?',
+        'Ska vi ta en promenad?',
         'Beskriv det mest negativa med att känna dig.',
         'Bör man diskutera privata saker som kärlek, politik och pengar med kollegor/bekanta?',
         'Vad är det mest löjliga du har övertygat om att någon är sant?',
@@ -141,6 +170,7 @@ class Selected {
         'Vilken serie hade du helst vilja va en del av?',
         'Är du lätt avundsjuk?',
         'Vad är den värsta matkombinationen du kan föreställa dig?',
+        'Är du en person som snoozar länge på morgon?',
         'Vilket är ditt lyckligaste tillfälle i ditt liv?',
         'Vad skulle du ta med dig till en öde ö om du bara fick ta med dig en sak?',
         'Nämn 5 saker som du hatar',
@@ -155,9 +185,11 @@ class Selected {
         'När du var liten - vad trodde du var det bästa med att vara vuxen då?',
         'Vad är det du ännu gillar, men som du kanske är för gammal för?',
         'Var är ditt drömresmål?',
+        'I Pettsson och Findus fanns små figurer som dels blev fokuset till ett av PC-spelen, vad hette figurerna? De börjar på M.',
         'Vad kan stressa upp dig, trots att det inte är en så storgrej egentligen?',
         'Har du någon förebild?',
         'Har du hittat någon favoritfråga under tiden du använt sidan?',
+        'Har du ett lager av förnödenheter för en kvinna hos dig - utifall hon glömt?',
         'Vilka böcker har du läst fler än 1 gång?',
         'Vill du hellre ha en kortare eller längre partner?',
         'Vad tror du att folk automatiskt antar om dig när de ser på dig?',
@@ -204,6 +236,7 @@ class Selected {
         'Kan du sticka, sy eller tråckla?',
         'Doppar du gärna bröd i resterna av en kokad skinka?',
         'Är skinka överskattat på julbordet?',
+        'Visste du att du kan ersätta sköljmedel med ättika?',
         'Firar du en högtid med hjälp av inlagd sill?',
         'Är sandaler med sockar accepterbart?',
         'Är du en introvärt eller extrovärt?',
@@ -469,7 +502,6 @@ class Selected {
         'Vad saknar appar som Tinder och Badoo?',
         'Är en killes längd viktig?',
         'Känner du att det är viktigt att rätta folk som säger fel?',
-        'Går du på medicin?',
         'Är grammatik viktigt?',
         'Vilket är det bästa sällskapsspelet?',
         'Skicka en snap till 3 personer, be varje om att få "Kan du beskriva mig med ett ord?".',
@@ -1118,7 +1150,6 @@ class Selected {
         'Vilken är den mest intressanta platsen du någonsin besökt?',
         'Har du några husdjur?',
         'Gillar du att resa?',
-        'Har du några fobier?',
         'Vilken skulle vara din perfekta dag?',
         'Vilka är dina favorittyper av aktiviteter?',
         'Zip-arkiv uppfanns av en svensk person (Gideon Sundbäck)',
@@ -1323,6 +1354,12 @@ class Selected {
         });
     }
     initializeComponent = () => {
+        const inputText = document.getElementById('filter');
+        const parm = questions.parseParam('question');
+        if (parm != null) {
+            inputText.value = parm != null ? parm : '';
+            questions.doFilterSearch(parm);
+        }
         const arr = document.lastModified.substring(0,8).split("/").reverse().join("-") + " " + document.lastModified.substring(11);
         document.getElementById("modified").innerHTML = arr;
         if (this.parseParam("nsfw")) {
@@ -1345,17 +1382,9 @@ class Selected {
             }
         }
 
-        const inputText = document.getElementById('filter');
-        const parm = questions.parseParam('question');
-        if (parm != null) {
-            inputText.value = parm != null ? parm : '';
-            questions.doFilterSearch(parm);
-        }
+        
 
-        if (this.parseParam("question") !== undefined) {
-            this.doFilterSearch(this.parseParam("question"));
-        }
-
+        
         this.addEventListeners();
     }
 }
