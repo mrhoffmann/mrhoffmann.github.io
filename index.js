@@ -25,10 +25,7 @@ const unsafe_check = (event) => {
             questions.counter = originalTopics.length + 1;
         }
     }
-    if(!questions.searching){
-        questions.randomize();
-    }
-    else{
+    if(questions.searching){
         questions.doFilterSearch(questions.searchWord);
     }
     questions.updateDisplay();
