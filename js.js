@@ -113,6 +113,7 @@ class Selected {
         'Vad blir du avtänd på?',
         'Har du sexleksaker?',
         'Har du någonsin haft en sexuell fantasi om mig?',
+        'Den värsta sexupplevelsen?',
         'Vad är det du inte gillar med mig?',
         'Vad tänder du mest på under sex?',
         'Vad tänder du på?',
@@ -120,6 +121,7 @@ class Selected {
         'Vad hindrar dig från att göra det första steget mot din dröm?',
         'Har du någon favorit sexposition?',
         'Vågar du ta in sexleksaker till sovrummet?',
+        'Du är med en ny person, du märker att personen vill ha sex, men du vill inte. Kan du säga nej?',
     ];
     topics = [
         'Visste du att kroppen har 206 ben i skelettet?',
