@@ -51,6 +51,7 @@ class Selected {
     sensitive_topis = [
         'Är du troende?',
         'Har du några fobier?',
+        'Är du ett äckel?',
         'Skulle doften av en person få dig att vägra sex?',
         'Är religion viktigt?',
         'Vilket är det sexigaste yrket?',
