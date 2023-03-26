@@ -17,11 +17,11 @@ class Selected {
             : this.randomize(),
             this.updateDisplay();
         this.findDuplicates();
-        this.topics.push('Denna sida innehåller ' + (this.topics.concat(this.sensitive_topis).length + 1) + ' frågor/samtalsämnen');
+        this.topics.push('Denna sida innehåller ' + (this.topics.concat(this.sensitive_topics).length + 1) + ' frågor/samtalsämnen');
     }
 
     findDuplicates() {
-        let t = this.topics.concat(this.sensitive_topis).slice().sort(),
+        let t = this.topics.concat(this.sensitive_topics).slice().sort(),
             n = [];
         for (let l = 0; l < t.length - 1; l++)
             t[l + 1] == t[l] && n.push(t[l]);
@@ -48,13 +48,15 @@ class Selected {
     get length() {
         return this.topics.length;
     }
-    sensitive_topis = [
+    sensitive_topics = [
         'Är du troende?',
         'Har du några fobier?',
         'Är du ett äckel?',
+        'Bästa låten under sexy time?',
         'Skulle doften av en person få dig att vägra sex?',
         'Är religion viktigt?',
         'Vilket är det sexigaste yrket?',
+        'Vad är det mest tabu du äger?',
         'Går du på medicin?',
         'Har du någon kink som du inte vågar prata om?',
         'Spelar bröststorlek någon roll?',
@@ -122,6 +124,7 @@ class Selected {
         'Vilken är din favorit-subreddit?',
         'Heter det buntband eller kattstrypare?',
         'Är du en organiserad person?',
+        'Kan man ha relationer som inte blir sexuella?',
         'Vad är din definition av barnsligt?',
         'Visste du att en av anledningarna att man kan vara mer trött är för att man avbryter en REM-cykel? Testa byt tid på larmet.',
         'Skulle du klara av att gå med ögonbindel i 24 vakna timmar?',
@@ -136,6 +139,7 @@ class Selected {
         'Kan du vicka på öronen?',
         'Vilken mobil var din första?',
         'Vad har du för nummer?',
+        '<a href="https://www.youtube.com/watch?v=s90ZrJS7BBU" target="_blank">Vines</a> var riktigt najs att ha i sitt liv.',
         'Vilka språk kan du?',
         'Hur vet man att du är glad?',
         'Hur lätt är det att göra dig arg?',
@@ -1346,7 +1350,7 @@ class Selected {
         try {
             this.topics = !this.nsfw ? this.shadowTopics.filter((x) =>
                 new RegExp(parm, 'gmdi').test(x)
-            ) : this.shadowTopics.concat(this.sensitive_topis).filter((x) =>
+            ) : this.shadowTopics.concat(this.sensitive_topics).filter((x) =>
                 new RegExp(parm, 'gmdi').test(x)
             );
             if (this.topics.length > 0) {

@@ -42,7 +42,7 @@ const jumpToTopic = () => {
 }
 
 const unsafe_check = (event) => {
-    questions.topics = event.checked ? originalTopics.concat(questions.sensitive_topis) : originalTopics;
+    questions.topics = event.checked ? originalTopics.concat(questions.sensitive_topics) : originalTopics;
     questions.nsfw = event.checked;
     if(event.checked){
         if(!questions.searching)
