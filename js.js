@@ -17,7 +17,7 @@ class Selected {
             : this.randomize(),
             this.updateDisplay();
         this.findDuplicates();
-        this.topics.push('Denna sida innehåller ' + this.topics.concat(this.sensitive_topis).length + ' frågor/samtalsämnen');
+        this.topics.push('Denna sida innehåller ' + (this.topics.concat(this.sensitive_topis).length + 1) + ' frågor/samtalsämnen');
     }
 
     findDuplicates() {
