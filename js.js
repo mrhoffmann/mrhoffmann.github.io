@@ -99,7 +99,7 @@ class Selected {
         'Har du varit på en begravning?',
         'Har du en sexfantasi?',
         'Hur känner du gällande att höra om sexuella fantasier som jag har?',
-        'Vad är ditt mest livsförändrade ögonblick?',
+        'Vad är ditt mest livsförändrande ögonblick?',
         'Vad är du nyfiken på att prova sexuellt som vi inte gjort förut?',
         'Upplever du är det är någon skillnad på att "ha sex" och "att älska"? Vad är i så fall skillnaden?',
         'Vad upplever du är de 3 viktigaste sakerna för att sex ska kännas bra för dig?',
