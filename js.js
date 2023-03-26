@@ -20,7 +20,7 @@ class Selected {
     }
 
     findDuplicates() {
-        let t = this.topics.slice().sort(),
+        let t = this.topics.concat(this.sensitive_topis).slice().sort(),
             n = [];
         for (let l = 0; l < t.length - 1; l++)
             t[l + 1] == t[l] && n.push(t[l]);
