@@ -23,7 +23,7 @@ const unsafe_check = (event) => {
         if(!questions.searching)
         {
             questions.counter = Math.floor(
-                Math.random() * (questions.topics.concat(questions.sensitive_topis).length - questions.shadowTopics.length)
+                Math.random() * (questions.length - questions.shadowTopics.length)
             ) + questions.shadowTopics.length
         }
     } else {
