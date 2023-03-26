@@ -92,6 +92,11 @@
 
 			const unsafe_check = (event) => {
 				questions.topics = event.checked ? originalTopics.concat(questions.sensitive_topis) : originalTopics;
+				if(event.checked){
+					questions.counter = originalTopics.length + 1;
+				}else{
+					questions.randomize();
+				}
 				questions.updateDisplay();
 			}
 

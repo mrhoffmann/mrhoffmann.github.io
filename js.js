@@ -5,7 +5,6 @@ class Selected {
     _searchWord = '';
 
     constructor() {
-        this.topics.push('Här är slutet, testa klicka på slumpa?');
         this._shadowTopics = this.topics;
         let values = Math.floor(Number(this.parseParam('topic')));
         void 0 !== values
