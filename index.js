@@ -22,7 +22,14 @@ const unsafe_check = (event) => {
     if(event.checked){
         if(!questions.searching)
         {
-            questions.counter = originalTopics.length + 1;
+            questions.counter = Math.floor(
+                Math.random() * (questions.topics.concat(questions.sensitive_topis).length - questions.shadowTopics.length)
+            ) + questions.shadowTopics.length
+        }
+    } else {
+        if(!questions.searching)
+        {
+            questions.randomize();
         }
     }
     if(questions.searching){
@@ -37,3 +44,4 @@ const clearSearch = () => {
 }
 
 questions.initializeComponent();
+console.log(questions.randomExcludingNoneSensitive());

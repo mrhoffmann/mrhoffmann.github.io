@@ -7,7 +7,7 @@ class Selected {
     searchWord = '';
 
     constructor() {
-        this._shadowTopics = this.topics;
+        this.shadowTopics = this.topics;
         let values = Math.floor(Number(this.parseParam('topic')));
         void 0 !== values
             ? 'number' == typeof values[1] &&
@@ -1258,7 +1258,9 @@ class Selected {
         this.updateDisplay();
     };
     randomize = () => {
-        this.counter = Math.floor(Math.random() * this.length) + 1;
+        this.counter = Math.floor(
+            Math.random() * this.length
+        ) + 1;
         this.updateDisplay();
     };
     updateLink() {
@@ -1337,9 +1339,9 @@ class Selected {
         this.searchWord = parm;
         this.searching = this.searchWord.length > 0;
         try {
-            this.topics = !this.nsfw ? this._shadowTopics.filter((x) =>
+            this.topics = !this.nsfw ? this.shadowTopics.filter((x) =>
                 new RegExp(parm, 'gmdi').test(x)
-            ) : this._shadowTopics.concat(this.sensitive_topis).filter((x) =>
+            ) : this.shadowTopics.concat(this.sensitive_topis).filter((x) =>
                 new RegExp(parm, 'gmdi').test(x)
             );
             if (this.topics.length > 0) {
