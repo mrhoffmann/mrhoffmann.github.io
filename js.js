@@ -157,6 +157,7 @@ class Selected {
         'Var är ditt drömresmål?',
         'Vad kan stressa upp dig, trots att det inte är en så storgrej egentligen?',
         'Har du någon förebild?',
+        'Har du hittat någon favoritfråga under tiden du använt sidan?',
         'Vilka böcker har du läst fler än 1 gång?',
         'Vill du hellre ha en kortare eller längre partner?',
         'Vad tror du att folk automatiskt antar om dig när de ser på dig?',
