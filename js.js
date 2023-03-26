@@ -11,9 +11,9 @@ class Selected {
         let values = Math.floor(Number(this.parseParam('topic')));
         void 0 !== values
             ? 'number' == typeof values[1] &&
-                values[1] > 0 &&
-                values[1] <= this.topics.length &&
-                (this.counter = values[1])
+            values[1] > 0 &&
+            values[1] <= this.topics.length &&
+            (this.counter = values[1])
             : this.randomize(),
             this.updateDisplay();
         this.findDuplicates();
@@ -1223,19 +1223,19 @@ class Selected {
     };
     updateLink() {
         const element = document.getElementById('link');
-        const newData = this.topics[this.counter -1];
+        const newData = this.topics[this.counter - 1];
         const currentIndex = this.length == 0 ? 1 : this.counter;
         document.getElementById('container').innerHTML = newData;
         document.querySelector('meta[name="description"]').setAttribute("content", newData);
         element.innerHTML = `${currentIndex} / ${this.length}`;
         element.href = document.location.origin + `?topic=${currentIndex}`;
         element.href += this.nsfw ? '&nsfw' : '';
-        element.href += this.searching ? '&question='+this.searchWord : '';
+        element.href += this.searching ? '&question=' + this.searchWord : '';
     }
-    overrideQuestionText(text){
+    overrideQuestionText(text) {
         document.getElementById('container').innerHTML = text;
     }
-    toggleText(){
+    toggleText() {
         if (this.length >= 1) {
             document.getElementById('container').classList.remove('hidetext');
             document.getElementById('link').classList.remove('hidetext');
@@ -1248,7 +1248,7 @@ class Selected {
         this.updateLink();
         this.toggleText();
 
-        if(this.length < 1){
+        if (this.length < 1) {
             this.counter = 0;
             this.overrideQuestionText("Din sökning gav inget resultat.");
         }
@@ -1276,9 +1276,8 @@ class Selected {
         const liveNotification = document.getElementById(
             'notification-' + this.aliveNotifications
         );
-        liveNotification.style.transform = `translateX(-${
-            liveNotification.getBoundingClientRect().width / 2
-        }px)`;
+        liveNotification.style.transform = `translateX(-${liveNotification.getBoundingClientRect().width / 2
+            }px)`;
         setTimeout(() => {
             notification.classList.add('fadeOut');
         }, 900);
@@ -1303,8 +1302,7 @@ class Selected {
             ) : this._shadowTopics.concat(this.sensitive_topis).filter((x) =>
                 new RegExp(parm, 'gmdi').test(x)
             );
-            if(this.topics.length > 0)
-            {
+            if (this.topics.length > 0) {
                 this.counter = 1;
             }
         } catch {
@@ -1325,21 +1323,21 @@ class Selected {
         });
     }
     initializeComponent = () => {
-        if(this.parseParam("nsfw")){
+        if (this.parseParam("nsfw")) {
             this.nsfw = true;
             document.getElementById('unsafe').checked = true;
-            unsafe_check({checked:true});
+            unsafe_check({ checked: true });
         }
-        if(this.parseParam("topic") === undefined){
+        if (this.parseParam("topic") === undefined) {
             this.randomize();
         } else {
             let value = this.parseParam("topic");
-            if(value.length > 0){
+            if (value.length > 0) {
                 this.counter = Number(this.parseParam("topic"));
                 this.updateDisplay();
             }
-            else{
-                if(!this.searching){
+            else {
+                if (!this.searching) {
                     this.randomize();
                 }
             }
@@ -1352,10 +1350,10 @@ class Selected {
             questions.doFilterSearch(parm);
         }
 
-        if(this.parseParam("question") !== undefined){
+        if (this.parseParam("question") !== undefined) {
             this.doFilterSearch(this.parseParam("question"));
         }
-        
+
         this.addEventListeners();
     }
 }
