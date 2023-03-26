@@ -16,6 +16,31 @@ const copy = () => {
     document.body.removeChild(textarea);
 };
 
+const showModal = () => {
+    document.getElementById("modal").classList.toggle("display");
+    document.getElementById("jumpToNumber").value = "";
+}
+
+const jump = () => {
+    showModal();
+}
+
+const setError = (error) => {
+    document.getElementById("modal-error").innerHTML = error;
+    document.getElementById("modal-error").classList.remove("display");
+}
+
+const jumpToTopic = () => {
+    const num = Number(document.getElementById("jumpToNumber").value);
+    if(num > 0 && num <= questions.length){
+        questions.jumpToTopic(num);
+        document.getElementById("modal-error").classList.add("display");
+    }
+    else{
+        setError("Du måste ange en siffra mellan 1-"+questions.length);
+    }
+}
+
 const unsafe_check = (event) => {
     questions.topics = event.checked ? originalTopics.concat(questions.sensitive_topis) : originalTopics;
     questions.nsfw = event.checked;
@@ -44,4 +69,3 @@ const clearSearch = () => {
 }
 
 questions.initializeComponent();
-console.log(questions.randomExcludingNoneSensitive());

@@ -55,6 +55,7 @@ class Selected {
         'Är religion viktigt?',
         'Vilket är det sexigaste yrket?',
         'Går du på medicin?',
+        'Har du någon kink som du inte vågar prata om?',
         'Spelar bröststorlek någon roll?',
         'Beskriv din värsta upplevelse med en partner.',
         'Har du haft sex i ett badkar/en dush?',
@@ -78,7 +79,7 @@ class Selected {
         'Vad brukar göra att du inte blir sugen på sex?',
         'Vilka kläder tycker du är sexiga?',
         'Har du fortfarande känslor för ett ex?',
-        'Vilket underkläder skulle du älska att se en mig i?',
+        'Vilka underkläder skulle du älska att se mig i?',
         'Hur många har du legat med?',
         'Har du haft sex i en skog?',
         'Tror du att himmel och helvete finns?',
@@ -216,7 +217,6 @@ class Selected {
         'Vad är motsatsen till självsäker?',
         'Finns det någonting du sett eller hört om, som du upplever att ingen annan har?',
         'Vilken djurart är den sötaste djurarten?',
-        'Har du någon kink som du inte vågar prata om?',
         'Är sommaren bästa årstiden?',
         'Vågar du åka båt?',
         'Behåller du grejer från dina ex-partners?',
@@ -1294,6 +1294,10 @@ class Selected {
             this.counter = 0;
             this.overrideQuestionText("Din sökning gav inget resultat.");
         }
+    }
+    jumpToTopic(num){
+        this.counter = num;
+        questions.updateDisplay();
     }
     parseParam = (e) => {
         var t = void 0;
