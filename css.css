@@ -190,7 +190,6 @@ button:active{
     border-radius:4px;
     left:calc(50% - 192.5px);
     width:385px;
-    height:110px;
 }
 #modal input[type=text]{
     margin-right:6px;
