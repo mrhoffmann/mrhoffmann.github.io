@@ -1325,8 +1325,7 @@ class Selected {
         this.updateDisplay();
     };
     checkSentenceExists = (p0) => {
-        if(document.location.origin === "http://127.0.0.1:5500"){       
-            console.log(document.location.origin);
+        if(document.location.origin === "http://127.0.0.1:5500"){
             for (let i = 0; i < this.length; i++) {
                 const sentenceWords = new Set(this.topics[i].split(" "));
                 sentenceWords.forEach((word) => {
@@ -1340,16 +1339,16 @@ class Selected {
             for (let i = 0; i < p0Words.length; i++) {
                 const counts = this.frequencyMap.get(p0Words[i]);
                 if (!counts) {
-                return false;
+                    return false;
                 }
             
                 for (let j = 0; j < this.length; j++) {
-                if (counts[j] !== (p0Words.filter((word) => word === p0Words[i]).length * (this.topics[j].split(" ").filter((word) => word === p0Words[i]).length))) {
-                    break;
-                }
-                if (j === this.length - 1) {
-                    return true;
-                }
+                    if (counts[j] !== (p0Words.filter((word) => word === p0Words[i]).length * (this.topics[j].split(" ").filter((word) => word === p0Words[i]).length))) {
+                        break;
+                    }
+                    if (j === this.length - 1) {
+                        return true;
+                    }
                 }
             }
         }
