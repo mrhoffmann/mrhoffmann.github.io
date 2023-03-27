@@ -1317,18 +1317,18 @@ class Selected {
         this.counter++;
         if (this.counter > this.length) this.counter = 1;
         this.updateDisplay();
-    };
+    }
     decrement = () => {
         this.counter--;
         if (this.counter < 1) this.counter = this.length;
         this.updateDisplay();
-    };
+    }
     randomize = () => {
         this.counter = Math.floor(
             Math.random() * this.length
         ) + 1;
         this.updateDisplay();
-    };
+    }
     checkSentenceExists = (p0) => {
         return new Promise((resolve, reject) => {
             if(document.location.origin === "http://127.0.0.1:5500"){
@@ -1363,7 +1363,7 @@ class Selected {
                 reject("system is not in dev");
             }
         });
-    };
+    }
     updateLink() {
         const element = document.getElementById('link');
         const newData = this.topics[this.counter - 1];
@@ -1409,7 +1409,7 @@ class Selected {
             }),
             t
         );
-    };
+    }
     sendNotification = (text) => {
         const notification = document.createElement('div');
         this.aliveNotifications++;
@@ -1432,7 +1432,7 @@ class Selected {
             document.body.removeChild(notification);
             this.aliveNotifications--;
         }, 2100);
-    };
+    }
     invalidateSearch = () => {
         this.searchWord = "";
         this.searching = false;
@@ -1456,7 +1456,7 @@ class Selected {
             //do nothing luls :)
         }
         this.updateDisplay();
-    };
+    }
     addEventListeners = () => {
         const inputText = document.getElementById('filter');
         inputText.addEventListener('input', (event) => {
@@ -1497,8 +1497,6 @@ class Selected {
                 }
             }
         }
-
-        
 
         this.findDuplicates();
         this.addEventListeners();
