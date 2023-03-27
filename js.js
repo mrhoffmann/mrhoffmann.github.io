@@ -17,13 +17,18 @@ class Selected {
             (this.counter = values[1])
             : this.randomize(),
             this.updateDisplay();
-        this.findDuplicates();
         this.topics.push('Denna sida innehåller ' + (this.topics.concat(this.sensitive_topics).length + 1) + ' frågor/samtalsämnen');
     }
 
     findDuplicates() {
         for(let i = 0; i < this.length; i++){
-            this.checkSentenceExists(this.topics[i]);
+            this.checkSentenceExists(this.topics[i])
+                .then(result => {
+                    console.log(result);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
     }
     get searchWord() {
@@ -1325,34 +1330,39 @@ class Selected {
         this.updateDisplay();
     };
     checkSentenceExists = (p0) => {
-        if(document.location.origin === "http://127.0.0.1:5500"){
-            for (let i = 0; i < this.length; i++) {
-                const sentenceWords = new Set(this.topics[i].split(" "));
-                sentenceWords.forEach((word) => {
-                    const count = this.frequencyMap.get(word) || new Array(this.length).fill(0);
-                    count[i]++;
-                    this.frequencyMap.set(word, count);
+        return new Promise((resolve, reject) => {
+            if(document.location.origin === "http://127.0.0.1:5500"){
+                setTimeout(() => {
+                    for (let i = 0; i < this.length; i++) {
+                        const sentenceWords = new Set(this.topics[i].split(" "));
+                        sentenceWords.forEach((word) => {
+                            const count = this.frequencyMap.get(word) || new Array(this.length).fill(0);
+                            count[i]++;
+                            this.frequencyMap.set(word, count);
+                        });
+                    }
+                    
+                    const p0Words = p0.split(" ");
+                    for (let i = 0; i < p0Words.length; i++) {
+                        const counts = this.frequencyMap.get(p0Words[i]);
+                        if (!counts) {
+                            reject(p0Words[i]);
+                        }
+                    
+                        for (let j = 0; j < this.length; j++) {
+                            if (counts[j] !== (p0Words.filter((word) => word === p0Words[i]).length * (this.topics[j].split(" ").filter((word) => word === p0Words[i]).length))) {
+                                break;
+                            }
+                            if (j === this.length - 1) {
+                                resolve("no duplicates found");
+                            }
+                        }
+                    }
                 });
+            } else{
+                reject("system is not in dev");
             }
-            
-            const p0Words = p0.split(" ");
-            for (let i = 0; i < p0Words.length; i++) {
-                const counts = this.frequencyMap.get(p0Words[i]);
-                if (!counts) {
-                    return false;
-                }
-            
-                for (let j = 0; j < this.length; j++) {
-                    if (counts[j] !== (p0Words.filter((word) => word === p0Words[i]).length * (this.topics[j].split(" ").filter((word) => word === p0Words[i]).length))) {
-                        break;
-                    }
-                    if (j === this.length - 1) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
+        });
     };
     updateLink() {
         const element = document.getElementById('link');
@@ -1490,7 +1500,7 @@ class Selected {
 
         
 
-        
+        this.findDuplicates();
         this.addEventListeners();
     }
 }
