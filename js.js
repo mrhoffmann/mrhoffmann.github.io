@@ -1329,9 +1329,9 @@ class Selected {
             for (let i = 0; i < this.length; i++) {
                 const sentenceWords = new Set(this.topics[i].split(" "));
                 sentenceWords.forEach((word) => {
-                const count = this.frequencyMap.get(word) || new Array(this.length).fill(0);
-                count[i]++;
-                this.frequencyMap.set(word, count);
+                    const count = this.frequencyMap.get(word) || new Array(this.length).fill(0);
+                    count[i]++;
+                    this.frequencyMap.set(word, count);
                 });
             }
             
