@@ -5,6 +5,7 @@ class Selected {
     searching = false;
     shadowTopics = [];
     searchWord = '';
+    frequencyMap = new Map();
 
     constructor() {
         this.shadowTopics = this.topics;
@@ -21,12 +22,9 @@ class Selected {
     }
 
     findDuplicates() {
-        let t = this.topics.concat(this.sensitive_topics).slice().sort(),
-            n = [];
-        for (let l = 0; l < t.length - 1; l++)
-            t[l + 1] == t[l] && n.push(t[l]);
-
-        n.length > 0 && console.log(n);
+        for(let i = 0; i < this.length; i++){
+            this.checkSentenceExists(this.topics[i]);
+        }
     }
     get searchWord() {
         const retval =
@@ -106,12 +104,13 @@ class Selected {
         'Vad brukar göra att du känner dig redo för beröring?',
         'Vad gjorde det bästa sexet du haft till det bästa?',
         'Vilka faktorer brukar påverka om du har lätt eller svårt att få orgasm?',
+        'Är du dominant eller inte?',
         'När fick du din första kyss?',
         'Hur ofta tycker du om att ha sex?',
         'Vad fick dig att få dåligt självförtroende?',
         'Skulle du kunna bryta mot lagen?',
         'Vad blir du avtänd på?',
-        'Har du sexleksaker?',
+        'Har du sexleksaker? Vilka?',
         'Har du någonsin haft en sexuell fantasi om mig?',
         'Den värsta sexupplevelsen?',
         'Vad är det du inte gillar med mig?',
@@ -120,14 +119,13 @@ class Selected {
         'Tror du på ett liv efter detta liv?',
         'Vad hindrar dig från att göra det första steget mot din dröm?',
         'Har du någon favorit sexposition?',
-        'Vågar du ta in sexleksaker till sovrummet?',
+        'Vågar du använda sexleksaker med en partner?',
         'Du är med en ny person, du märker att personen vill ha sex, men du vill inte. Kan du säga nej?',
     ];
     topics = [
         'Visste du att kroppen har 206 ben i skelettet?',
         'Vilken är din favorit-subreddit?',
         'Heter det buntband eller kattstrypare?',
-        'Vad väger mest, ett kilo fjädrar eller ett kilo tegelstenar?',
         'Är du en organiserad person?',
         'Kan man ha relationer som inte blir sexuella?',
         'Vad är din definition av barnsligt?',
@@ -169,6 +167,7 @@ class Selected {
         'Har du en favoritdrink?',
         'Hur många larm har du?',
         'Vill du ta en fika med mig?',
+        'Har du någonsin använt fingerfärg?',
         'Ska vi ta en promenad?',
         'Beskriv det mest negativa med att känna dig.',
         'Bör man diskutera privata saker som kärlek, politik och pengar med kollegor/bekanta?',
@@ -178,7 +177,21 @@ class Selected {
         'Har din familj något “hemligt” släktrecept?',
         'När skrattade du senaste så mycket så du började gråta?',
         'Vad är det konstigaste du någonsin gjort när du var liten?',
+        'Har du någonsin gjort en lerfigur?',
         'Berätta en hemlighet om dig själv.',
+        'Hur många dagar gammal är du?',
+        'När ringde du dina föräldrar senast?',
+        'Föredrar du långt eller kort hår?',
+        'Har du några säkerhetskameror?',
+        'Vilken modell av dammsugare har du?',
+        'Skulle du gå med på att hoppa bungee-jump om någon frågade dig "ska vi dra om fem minuter"?',
+        'När åkte du pulka senast?',
+        'Vad är det fulaste ordet du kan komma på?',
+        'Vilken genre av film föredrar du?',
+        'Har du testat Linux?',
+        'Hur mycket lägger du på spar per månad?',
+        'Handlar du på AliExpress/Wish?',
+        'När köpte du en dator senast?',
         'Fria tyglar, du har inga ansvar eller begränsningar imorgon, vad skulle du vilja göra?',
         'Vilken är din konstigaste dröm?',
         'Vilken är den vanligaste missbedömningen folk gör om dig?',
@@ -192,6 +205,7 @@ class Selected {
         'Vad är den värsta matkombinationen du kan föreställa dig?',
         'Är du en person som snoozar länge på morgon?',
         'Vilket är ditt lyckligaste tillfälle i ditt liv?',
+        'Gillar du naturgodis?',
         'Vad skulle du ta med dig till en öde ö om du bara fick ta med dig en sak?',
         'Nämn 5 saker som du hatar',
         'Tycker du det är attraktivt att vara helrakad på huvudet?',
@@ -205,6 +219,18 @@ class Selected {
         'När du var liten - vad trodde du var det bästa med att vara vuxen då?',
         'Vad är det du ännu gillar, men som du kanske är för gammal för?',
         'Var är ditt drömresmål?',
+        'Har du gjort något estetiskt? T.ex. målat en tavla, gjort en lerfigur eller annat?',
+        'Blir du lätt andfådd?',
+        'Gillar du stark mat?',
+        'Föredrar du att synas eller vara dold i sociala sammanhang?',
+        'Tar du lätt ledarrollen?',
+        'Visste du att en portion juice kan innehålla mer socker än en powerbar?',
+        'Är du duktig på att komma på saker att prata om?',
+        'Gillar du att vara ute?',
+        'Har du lätt för att tugga dig själv i tungan?',
+        'Skulle du kalla dig själv för lugn?',
+        'Brukar du överförklara dig när du får en fråga som bör ha ett kort svar?',
+        'Är det oftast du som kommer på saker att göra?',
         'I Pettsson och Findus fanns små figurer som dels blev fokuset till ett av PC-spelen, vad hette figurerna? De börjar på M.',
         'Vad kan stressa upp dig, trots att det inte är en så storgrej egentligen?',
         'Har du någon förebild?',
@@ -212,10 +238,12 @@ class Selected {
         'Har du ett lager av förnödenheter för en kvinna hos dig - utifall hon glömt?',
         'Vilka böcker har du läst fler än 1 gång?',
         'Vill du hellre ha en kortare eller längre partner?',
+        'Halkar du lätt vintertid?',
         'Vad tror du att folk automatiskt antar om dig när de ser på dig?',
         'Har du några favoritcitat från framgångsrika människor?',
         'Är du en weeb?',
         'Vad tycker du om den nya generationen av människor?',
+        'Har du ett bra minne?',
         'Vad är det fulaste du vet i klädesväg?',
         'Brukar du gå på stan i foppatofflor?',
         'Har du någon tro som kan ses som kontroversiell eller stötande?',
@@ -234,6 +262,28 @@ class Selected {
         'Gillar du fotboll?',
         'Tycker du om sköldpaddor?',
         'Har du en bucketlist?',
+        'Är du en person som gillar drama?',
+        'Har du lätt att kommunicera med din partner om problem?',
+        'Bråkar du lätt?',
+        'Har du ett och samma lösenord på allting?',
+        'Gillar du tavlor eller föredrar du att inte ha några?',
+        'Hur många foton på familjemedlemmar har du i ditt hem?',
+        'Är kakor godare än choklad?',
+        'Vilket kaffe är godast?',
+        'Gillar du att åka båt?',
+        'Har du panikångest?',
+        'Maneter ser ut som stora spottloskor.',
+        'Har du testat äta bläckfisk?',
+        'Vad smakar anka som?',
+        'Förstår du hur reglerna är för datumparkering?',
+        'Vad heter Mario i efternamn?',
+        'Det finns djur som har ögon, som är blinda, som har hud som växer över ögonen.',
+        'Gillar du att prata i högtalartelefon?',
+        'Hur många kuddar har du?',
+        'Har du ett varmt eller kallt täcke?',
+        'Tenderar du att lätt bli sjuk?',
+        'När du är på gymmet, föredrar du styrke- eller konditionsträning?',
+        'Videochattar du någonsin?',
         'Vilken är den bästa såsen?',
         'Går bilen bra?',
         'Säger man Bepsi, Pespi eller Pepsi?',
@@ -253,6 +303,7 @@ class Selected {
         'När bytte du ut alla dina underkläder senast, och hur länge har du ägt dem?',
         'Vilken är din favoritpizza?',
         'Kan du sticka, sy eller tråckla?',
+        'Kramar du en kudde när du sover?',
         'Doppar du gärna bröd i resterna av en kokad skinka?',
         'Är skinka överskattat på julbordet?',
         'Visste du att du kan ersätta sköljmedel med ättika?',
@@ -269,6 +320,7 @@ class Selected {
         'Kan du tänka dig leva i en värld utan musik?',
         'Beställer du hem färdig mat mer än du handlar ingredienser?',
         'Hur mycket pengar handlar du för tobak/alkohol per månad?',
+        'Vad heter Luigi i efternamn?',
         'Hur länge sitter du vid datorn/tv:n per dag?',
         'Fryser du lätt?',
         'Är du trovärdig?',
@@ -338,7 +390,7 @@ class Selected {
         'Jobbar du helst med händerna, eller är du en person som hellre sitter vid skrivbordet?',
         'Har du något med dig som är awkward?',
         'Hur uttalar man lakrits?',
-        'Är du allergisk?',
+        'Är du allergisk mot någonting?',
         'Vad är det värsta du vet?',
         'Är du är en morgonperson?',
         'När städade du senast?',
@@ -599,7 +651,6 @@ class Selected {
         'Finns det ämnen du anser är tabu?',
         'Väder',
         'Did you see that ludicrous display last night<a href="https://www.youtube.com/watch?v=6yN2H3--1aw" target="_blank">?</a>',
-        'Vad är det mest tabu du äger?',
         'Har du någonsin haft en partner som avlidit under ert förhållande?',
         'Har du varit med om ett trauma någon gång?',
         'Du får en oväntad faktura på 2000kr, har du råd den 15:e en månad att betala den?',
@@ -1272,6 +1323,37 @@ class Selected {
             Math.random() * this.length
         ) + 1;
         this.updateDisplay();
+    };
+    checkSentenceExists = (p0) => {
+        if(document.location.origin === "http://127.0.0.1:5500"){       
+            console.log(document.location.origin);
+            for (let i = 0; i < this.length; i++) {
+                const sentenceWords = new Set(this.topics[i].split(" "));
+                sentenceWords.forEach((word) => {
+                const count = this.frequencyMap.get(word) || new Array(this.length).fill(0);
+                count[i]++;
+                this.frequencyMap.set(word, count);
+                });
+            }
+            
+            const p0Words = p0.split(" ");
+            for (let i = 0; i < p0Words.length; i++) {
+                const counts = this.frequencyMap.get(p0Words[i]);
+                if (!counts) {
+                return false;
+                }
+            
+                for (let j = 0; j < this.length; j++) {
+                if (counts[j] !== (p0Words.filter((word) => word === p0Words[i]).length * (this.topics[j].split(" ").filter((word) => word === p0Words[i]).length))) {
+                    break;
+                }
+                if (j === this.length - 1) {
+                    return true;
+                }
+                }
+            }
+        }
+        return false;
     };
     updateLink() {
         const element = document.getElementById('link');
