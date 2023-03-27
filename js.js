@@ -1357,13 +1357,13 @@ class Selected {
                                 break;
                             }
                             if (j === this.length - 1) {
-                                resolve("no duplicates found");
+                                resolve(true);
                             }
                         }
                     }
                 });
             } else{
-                reject("system is not in dev");
+                reject(false);
             }
         });
     }
