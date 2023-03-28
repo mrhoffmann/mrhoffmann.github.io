@@ -26,7 +26,7 @@ body,html{
     background:#0d1117;
     overflow:hidden
 }
-#buttons,#input-wrapper,#links,body>span{
+#buttons,#input-wrapper,#links,body>span,#control-container{
     width:100vw
 }
 body>span{
@@ -48,43 +48,36 @@ body>span:hover,h1:hover{
 @media (max-width:480px){
     h1{
         font-size:5vw;
-        height:40vh;
     }
 }
 @media (min-width:481px) and (max-width:767px){
     h1{
         font-size:5vw;
-        height:40vh;
     }
 }
 @media (min-width:768px) and (max-width:1024px){
     h1{
         font-size:5vw;
-        height:40vh;
     }
 }
 @media (min-width:1025px) and (max-width:1280px){
     h1{
         font-size:3vw;
-        height:40vh;
     }
 }
 @media (min-width:1281px){
     h1{
         font-size:3vw;
-        height:40vh;
     }
 }
 @media (min-width:2400px){
     h1{
         font-size:2vw;
-        height:40vh;
     }
 }
 h1{
     width:80%;
     margin:0 10%;
-    height:57vh;
     padding-top:15vh;
     color:#adbac7
 }
@@ -156,8 +149,11 @@ button:active{
 #clear_search,#input-wrapper input,#jump,#modal input[type=text],#unsafe_text{
     color:#b5c2ef
 }
+#unsafe_container{
+    padding-bottom: 2vh;
+}
 #unsafe_text{
-    padding-left:10px
+    padding-left:10px;
 }
 #clear_search,#jump{
     text-align:center;
@@ -245,4 +241,9 @@ span:hover{
 }
 #input-wrapper>span{
     padding:0 6px
+}
+#control-container{
+    padding-top:1vh;
+    position:fixed;
+    bottom:0;
 }

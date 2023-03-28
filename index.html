@@ -31,37 +31,39 @@
 		<span id="modified">1970-01-01 00:00:00</span>
 		<span>Inget på denna sida får tas på allvar. "visste du" kan vara utdaterat.</span>
 		<h1 id="container" onclick="copy()"></h1>
-		<div id="unsafe_container"><input type="checkbox" id="unsafe" onclick="unsafe_check(this)"></input><label for="unsafe" id="unsafe_text">Inkludera känsligare frågor</label></div>
-		<div id="input-wrapper">
-			<input type="text" id="filter" autocomplete="off" placeholder="Sök"><span id="jump" onclick="jump()">hoppa</span><span id="clear_search" onclick="clearSearch()">rensa</span></input>
-		</div>
-		<div id="links">
-			<a href="" id="link"></a>
-		</div>
-		<div id="buttons">
-			<div id="wrapper">
-				<button
-					onclick="questions.decrement()"
-					id="prev"
-					aria-label="Förra"
-					title="Förra"
-				>
-					<
-				</button>
-				<button
-					onclick="questions.randomize()"
-					id="rand"
-					aria-label="Slumpa"
-					title="Slumpa"
-				></button>
-				<button
-					onclick="questions.increment()"
-					id="next"
-					aria-label="Nästa"
-					title="Nästa"
-				>
+		<div id="control-container">
+			<div id="unsafe_container"><input type="checkbox" id="unsafe" onclick="unsafe_check(this)"></input><label for="unsafe" id="unsafe_text">Inkludera känsligare frågor</label></div>
+			<div id="input-wrapper">
+				<input type="text" id="filter" autocomplete="off" placeholder="Sök"><span id="jump" onclick="jump()">hoppa</span><span id="clear_search" onclick="clearSearch()">rensa</span></input>
+			</div>
+			<div id="links">
+				<a href="" id="link"></a>
+			</div>
+			<div id="buttons">
+				<div id="wrapper">
+					<button
+						onclick="questions.decrement()"
+						id="prev"
+						aria-label="Förra"
+						title="Förra"
 					>
-				</button>
+						<
+					</button>
+					<button
+						onclick="questions.randomize()"
+						id="rand"
+						aria-label="Slumpa"
+						title="Slumpa"
+					></button>
+					<button
+						onclick="questions.increment()"
+						id="next"
+						aria-label="Nästa"
+						title="Nästa"
+					>
+						>
+					</button>
+				</div>
 			</div>
 		</div>
 		<script src="js.js"></script>
