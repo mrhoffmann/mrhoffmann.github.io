@@ -7,7 +7,6 @@
         width:100%;
         min-width:0;
         border-radius: 0;
-        background-color: #fff !important;
     }
     *{
         border-radius: 0;
@@ -21,7 +20,6 @@
         width:100%;
         min-width:0;
         border-radius: 0;
-        background-color: #f10 !important;
     }
     *{
         border-radius: 0;
@@ -35,7 +33,6 @@
         width:100%;
         min-width:0;
         border-radius: 0;
-        background-color: rgb(68, 255, 109) !important;
     }
     *{
         border-radius: 0;
@@ -48,7 +45,6 @@
     #filter{
         width:100%;
         min-width:0;
-        background-color: rgb(163, 126, 45) !important;
     }
     *{
         border-radius: 0;
