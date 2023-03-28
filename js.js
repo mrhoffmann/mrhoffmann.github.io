@@ -101,6 +101,7 @@ class Selected {
         'Finns det någon del av din kropp som du skulle vilja att jag gav mer uppmärksamhet sexuellt? På vilket sätt gillar du att bli berörd där?',
         'Har du varit på en begravning?',
         'Har du en sexfantasi?',
+        'Är du en erfaren person?',
         'Hur känner du gällande att höra om sexuella fantasier som jag har?',
         'Vad är ditt mest livsförändrande ögonblick?',
         'Vad är du nyfiken på att prova sexuellt som vi inte gjort förut?',
@@ -1325,7 +1326,6 @@ class Selected {
         'Violets are blue, You look like a donkey, And smell like one, too.',
         'Rensar du någonsin duschen från hår?',
         'Hur länge sitter du med telefonen dagligen?',
-        'Är att ge saker till människor ett sätt att visa kärlek?',
         'Är att ge saker till människor ett sätt visa att kärlek?',
         'Blickar du tillbaka på vad som varit och tänker på vad du inte hunnit eller aldrig tog initiativ att göra?',
     ];
