@@ -145,6 +145,8 @@ class Selected {
         'Använder du hellre Postnord eller Schenker?',
         'Vilken är den roligaste tecknade figuren?',
         'Kan du vicka på öronen?',
+        'Har du blivit utsatt för ett brott?',
+        '',
         'Vilken mobil var din första?',
         'Hur gick det på jobbet idag?',
         'Vad har du för nummer?',
@@ -164,6 +166,7 @@ class Selected {
         'Visste du att en stark blixt innehåller cirka 100 miljoner volt, med ungefär 150\'000 ampere. En normal blixt är 30m volt med 20\'000 ampere. Med formulan<br>kilowatt = (amps * volt)/1000<br>vet man därför att en normal blixt kan driva en genomsnittlig TV i 7.5m timmar.',
         'Vad äter du som tröstmat?',
         'Kan du vicka på näsvingarna?',
+        'Har du någonsin fysiskt skadat någon?',
         'Hur många mariekex tror du att du kan få plats med samtidigt i din mun utan att tugga dem?',
         'Kan du buktala?',
         'Säger någons färgval på kläder något om dem?',
@@ -1100,6 +1103,17 @@ class Selected {
         'Skulle du snömula ett barn?',
         'Får du lätt abstinens?',
         'Får du lätt blåmärken?',
+        'Har du någonsin behövt kryckor?',
+        'Skurar du?',
+        'Vet du vilka delar som sitter i din dator utantill?',
+        'Vilken färg är din soffa?',
+        'Föredrar du mörka möbler eller ljusa?',
+        'Har du glasögon?',
+        'Har du glasögon?',
+        '',
+        '',
+        '',
+        '',
         'Hur ofta simmar du i sjön på somrar?',
         'När var du på IKEA senast?',
         'Anser du dig själv som optimist eller pessimist?',
@@ -1332,38 +1346,29 @@ class Selected {
         ) + 1;
         this.updateDisplay();
     }
-    checkSentenceExists = (p0) => {
+    separateAndSortThenJoin = (phrase) => {
+        return phrase.split(" ").sort().join(" ");
+    }
+    checkSentenceExists = (sentence) => {
         return new Promise((resolve, reject) => {
             if(document.location.origin === "http://127.0.0.1:5500"){
                 setTimeout(() => {
-                    for (let i = 0; i < this.length; i++) {
-                        const sentenceWords = new Set(this.topics[i].split(" "));
-                        sentenceWords.forEach((word) => {
-                            const count = this.frequencyMap.get(word) || new Array(this.length).fill(0);
-                            count[i]++;
-                            this.frequencyMap.set(word, count);
-                        });
-                    }
+                    const sortedSentence = this.separateAndSortThenJoin(sentence);
                     
-                    const p0Words = p0.split(" ");
-                    for (let i = 0; i < p0Words.length; i++) {
-                        const counts = this.frequencyMap.get(p0Words[i]);
-                        if (!counts) {
-                            reject(p0Words[i]);
-                        }
-                    
-                        for (let j = 0; j < this.length; j++) {
-                            if (counts[j] !== (p0Words.filter((word) => word === p0Words[i]).length * (this.topics[j].split(" ").filter((word) => word === p0Words[i]).length))) {
-                                break;
-                            }
-                            if (j === this.length - 1) {
-                                resolve(true);
+                    let count = 0;
+                    for (let i = 0; i < this.topics.length; i++) {
+                        const sortedArrItem = this.separateAndSortThenJoin(this.topics[i]);
+                        if (sortedSentence === sortedArrItem) {
+                            count++;
+                            if (count > 1) {
+                                reject(sortedSentence);
+                                return;
                             }
                         }
                     }
+                    
+                    resolve(count === 1);
                 });
-            } else{
-                reject(false);
             }
         });
     }
