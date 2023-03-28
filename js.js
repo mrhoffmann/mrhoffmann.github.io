@@ -1108,12 +1108,10 @@ class Selected {
         'Vet du vilka delar som sitter i din dator utantill?',
         'Vilken färg är din soffa?',
         'Föredrar du mörka möbler eller ljusa?',
-        'Har du glasögon?',
-        'Har du glasögon?',
-        '',
-        '',
-        '',
-        '',
+        'Kan du sova på tåg/bussar?',
+        'Är du med i en kult/sekt?',
+        'När bodde du på hotell senast och varför?',
+        'Har du någon prenumerationstjänst, vilka?',
         'Hur ofta simmar du i sjön på somrar?',
         'När var du på IKEA senast?',
         'Anser du dig själv som optimist eller pessimist?',
@@ -1328,6 +1326,7 @@ class Selected {
         'Rensar du någonsin duschen från hår?',
         'Hur länge sitter du med telefonen dagligen?',
         'Är att ge saker till människor ett sätt att visa kärlek?',
+        'Är att ge saker till människor ett sätt visa att kärlek?',
         'Blickar du tillbaka på vad som varit och tänker på vad du inte hunnit eller aldrig tog initiativ att göra?',
     ];
     increment = () => {
@@ -1347,28 +1346,27 @@ class Selected {
         this.updateDisplay();
     }
     separateAndSortThenJoin = (phrase) => {
-        return phrase.split(" ").sort().join(" ");
+        return phrase.toLowerCase().split(" ").sort().join(" ");
     }
     checkSentenceExists = (sentence) => {
         return new Promise((resolve, reject) => {
             if(document.location.origin === "http://127.0.0.1:5500"){
-                setTimeout(() => {
-                    const sortedSentence = this.separateAndSortThenJoin(sentence);
-                    
-                    let count = 0;
-                    for (let i = 0; i < this.topics.length; i++) {
-                        const sortedArrItem = this.separateAndSortThenJoin(this.topics[i]);
-                        if (sortedSentence === sortedArrItem) {
-                            count++;
-                            if (count > 1) {
-                                reject(sortedSentence);
-                                return;
-                            }
+                const sortedSentence = this.separateAndSortThenJoin(sentence);
+                
+                let count = 0;
+                const tempArr = this.topics.concat(this.sensitive_topics);
+                for (let i = 0; i < tempArr.length; i++) {
+                    const sortedArrItem = this.separateAndSortThenJoin(tempArr[i]);
+                    if (sortedSentence === sortedArrItem) {
+                        count++;
+                        if (count > 1) {
+                            reject({sentence: sentence, maxLength: tempArr.length, atPosition: i, including: true});
+                            return;
                         }
                     }
-                    
-                    resolve(count === 1);
-                });
+                }
+                
+                resolve(count === 1);
             }
         });
     }
