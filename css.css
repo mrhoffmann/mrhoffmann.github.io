@@ -45,36 +45,6 @@ body>span:hover,h1:hover{
 .hidetext{
     color:#0d1117
 }
-@media (max-width:480px){
-    h1{
-        font-size:5vw;
-    }
-}
-@media (min-width:481px) and (max-width:767px){
-    h1{
-        font-size:5vw;
-    }
-}
-@media (min-width:768px) and (max-width:1024px){
-    h1{
-        font-size:5vw;
-    }
-}
-@media (min-width:1025px) and (max-width:1280px){
-    h1{
-        font-size:3vw;
-    }
-}
-@media (min-width:1281px){
-    h1{
-        font-size:3vw;
-    }
-}
-@media (min-width:2400px){
-    h1{
-        font-size:2vw;
-    }
-}
 h1{
     width:80%;
     margin:0 10%;
