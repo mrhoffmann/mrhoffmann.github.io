@@ -1362,20 +1362,27 @@ class Selected {
     separateAndSortThenJoin = (phrase) => {
         return phrase.toLowerCase().split(" ").sort().join(" ");
     }
+    getStartPositionOfNSWF = () => {
+        return this.shadowTopics.length;
+    }
     checkSentenceExists = (sentence) => {
         return new Promise((resolve, reject) => {
             if(document.location.origin === "http://127.0.0.1:5500"){
-                const sortedSentence = this.separateAndSortThenJoin(sentence);
-                
                 let count = 0;
+                const sortedSentence = this.separateAndSortThenJoin(sentence);                
                 const tempArr = this.topics.concat(this.sensitive_topics);
                 for (let i = 0; i < tempArr.length; i++) {
-                    const sortedArrItem = this.separateAndSortThenJoin(tempArr[i]);
-                    if (sortedSentence === sortedArrItem) {
-                        count++;
-                        if (count > 1) {
-                            reject({sentence: sentence, maxLength: tempArr.length, atPosition: i, including: true});
-                            return;
+                    if(tempArr[i].length < 1){
+                        console.error("empty at " + i);
+                    }
+                    else{
+                        const sortedArrItem = this.separateAndSortThenJoin(tempArr[i]);
+                        if (sortedSentence === sortedArrItem) {
+                            count++;
+                            if (count > 1) {
+                                reject({sentence: sentence, maxLength: tempArr.length, atPosition: i, including: true});
+                                return;
+                            }
                         }
                     }
                 }
