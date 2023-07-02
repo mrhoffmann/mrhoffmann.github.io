@@ -384,7 +384,7 @@ class Selected {
         'När var du en buse senast?',
         'Sprutgrädde eller göra den själv?',
         'Om du blev tvingad att äta samma sak i en vecka, du får inte äta något annat, vad skulle det vara?',
-        'Är grädde bara god med vaniljpulver?',
+        'Är grädde bara gott tillsammans med vaniljpulver?',
         'Äter du gröt?',
         'Vad är det bästa att äta till frukost?',
         'Har du testat att ha mango i din sallad?',
