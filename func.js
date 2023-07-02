@@ -1351,7 +1351,7 @@ class Selected {
         'Kan du mycket om historiska personer eller händelser?',
         'Har du någonsin lärt dig eller provat något helt nytt?',
         'Finns det någon artist eller musiker som du följer religiöst?',
-        'Har du några karaktärer eller böcker?',
+        'Har du några favoritkaraktärer eller böcker?',
         'Vilken är den vackraste plats du någonsin sett?',
         'Har du några fobier eller rädslor?',
         'Har du någon komedi, komiker eller komediprogram som du gillar?',
