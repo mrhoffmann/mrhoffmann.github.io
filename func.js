@@ -365,7 +365,6 @@ class Selected {
         'Visste du att du kan ersätta sköljmedel med ättika?',
         'Firar du en högtid med hjälp av inlagd sill?',
         'Är sandaler med sockar accepterbart?',
-        'Är du en introvärt eller extrovärt?',
         'Är du smartare än en hög sand?',
         'Hur tämjer du en häst i Minecraft?',
         'En vanliga Cola Zero innehåller 32mg, vilket är ungefär hälften av en kopp kaffe (80mg).',
