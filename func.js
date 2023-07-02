@@ -659,7 +659,7 @@ class Selected {
         'Det mest avtändande en kille kan säga?',
         'Visste du att ha inlärningstillfällen på 30 minuter styck med 5 minuter rast mellan vardera kan öka din förmåga att ta in ny information?',
         'Har du stenkoll på din ekonomi?',
-        'Har du bott i samma stad hela ditt liv?',
+        'Har du bott i samma ort hela ditt liv?',
         'Är du uppvuxen i stan eller på landet?',
         'Vilken är den dummaste investeringen du gjort?',
         'Visste du att fett jämfört med kolhydrater (4) och protein (4) har 9 kcal per gram.',
