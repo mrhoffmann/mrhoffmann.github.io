@@ -1366,7 +1366,6 @@ class Selected {
         'Vad är det mest intressanta du någonsin sett?',
         'Läser du mycket?',
         'Har du någonsin haft ett särskilt minnesvärt möte med ett djur?',
-        'Har du någonsin haft några penslar med berömmelse eller kändis?',
         'Kan du göra något trick? T.ex. på skateboard eller liknande.',
         'Sover du någonsin mitt på dagen och ändå kan sova på natten?',
         'Har du ärr?',
