@@ -2328,7 +2328,7 @@ class Selected {
 		'Vad anser du vara syftet med livet enligt din tro?',
 		'Hur förhåller du dig till andliga texter eller skrifter?',
 		'Har du några speciella helgdagar eller högtider som är viktiga för dig?',
-		'Är du speciell?',
+		'Är du speciell?'
 	];
 	increment = () => {
 		this.counter++;
