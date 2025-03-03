@@ -219,7 +219,7 @@ class Selected {
 		'Känner du att du har en stark inre kompass eller moralisk kompass?',
 		'Finns det något du vill utforska eller lära dig mer om, men inte har haft möjlighet till?',
 		'Hur ser du på din egen mognadsnivå och personliga tillväxt?',
-		'Har du någonsin haft en KK?'
+		'Har du någonsin haft en KK?',
 		'Vad är din syn på kärlek och hur den manifesterar sig i olika relationer?',
 		'Har du någonsin känt dig utmanad att acceptera förändringar i dig själv?',
 		'Vad ger dig inre frid och lycka, och hur prioriterar du dessa element i ditt liv?',
