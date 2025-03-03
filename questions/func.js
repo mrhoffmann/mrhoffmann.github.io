@@ -192,7 +192,7 @@ class Selected {
 		'Har du någonsin känt en attraktion till någon som var helt opassande?',
 		'Har du någonsin blivit frestad att ligga med någon du inte borde?',
 		'Vad är det mest skamliga du har gjort när du trodde att ingen såg?',
-		'Har du någonsin haft en hemlig kod eller signal med någon för att smyga iväg och göra något förbjudet?'
+		'Har du någonsin haft en hemlig kod eller signal med någon för att smyga iväg och göra något förbjudet?',
 		'Finns det några dolda passioner eller drömmar som du inte delar med andra?',
 		'Har du några oskrivna regler eller principer som styr dina handlingar?',
 		'Hur påverkar ditt förflutna ditt förtroende för framtiden?',
