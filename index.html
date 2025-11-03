@@ -1,5 +1,73 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Vad ska jag prata om?!</title>
+		<meta
+			name="description"
+			content="Visst är det väl en jävla pina att alltid komma på något att prata om? Låt oss fixa det. Här får du exempel på saker som ni kan prata om."
+		/>
+		<meta name="theme-color" content="#0d1117" />
+		<meta name="author" content="Fredrik Hoffmann mrhoffmann@github.com" />
+		<?xml version="1.0" ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css.css">
+		<link rel="stylesheet" href="small.css">
+	</head>
+
 	<body>
-		<a href="questions/">Questions</a>
+		<div id="modal" class="display" tabindex="-1" role="dialog">
+			<div id="modal-header"><h5>Hoppa till fråga</h5></div>
+			<div id="modal-error" class="display"></div>
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<input type="text" id="jumpToNumber" placeholder="ange #"/>
+						<button type="button" class="btn btn-primary" onclick="jumpToTopic()">Hoppa</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="showModal()">Avbryt</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<span id="modified">1970-01-01 00:00:00</span>
+		<span>Inget på denna sida får tas på allvar. "visste du" kan vara utdaterat.</span>
+		<h1 id="container" onclick="copy()"></h1>
+		<div id="control-container">
+			<div id="unsafe_container"><input type="checkbox" id="unsafe" onclick="unsafe_check(this)"></input><label for="unsafe" id="unsafe_text">Inkludera känsligare frågor</label></div>
+			<div id="input-wrapper">
+				<input type="text" id="filter" autocomplete="off" placeholder="Sök"><span id="jump" onclick="jump()">hoppa</span><span id="clear_search" onclick="clearSearch()">rensa</span></input>
+			</div>
+			<div id="links">
+				<a href="" id="link"></a>
+			</div>
+			<div id="buttons">
+				<div id="wrapper">
+					<button
+						onclick="questions.decrement()"
+						id="prev"
+						aria-label="Förra"
+						title="Förra"
+					>
+						<
+					</button>
+					<button
+						onclick="questions.randomize()"
+						id="rand"
+						aria-label="Slumpa"
+						title="Slumpa"
+					></button>
+					<button
+						onclick="questions.increment()"
+						id="next"
+						aria-label="Nästa"
+						title="Nästa"
+					>
+						>
+					</button>
+				</div>
+			</div>
+		</div>
+		<script src="func.js"></script>
+		<script src="index.js"></script>
 	</body>
 </html>
