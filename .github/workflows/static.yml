@@ -41,41 +41,48 @@ jobs:
           npm install -g clean-css-cli
           npm install -g uglify-js
 
-      - name: Minify CSS files only
+      - name: Minify CSS and JS files
         run: |
-          # Create minified versions
+          # Minify CSS files
           cleancss -o css.min.css css.css
           cleancss -o small.min.css small.css
-          # Replace original files with minified versions
-          mv css.min.css css.css
-          mv small.min.css small.css
-          echo "=== CSS files minified in place ==="
-          ls -la *.css
-          wc -c *.css
-
-      - name: Minify JS files
-        run: |
-          # Create minified versions
+          # Minify JS files
           uglifyjs func.js -o func.min.js -c -m
           uglifyjs index.js -o index.min.js -c -m
-          # Replace original files with minified versions
-          mv func.min.js func.js
-          mv index.min.js index.js
-          echo "=== JS files minified in place ==="
-          ls -la *.js
-          wc -c *.js
+          echo "=== Minified files created ==="
+          ls -la *.min.*
 
-      - name: Verify CSS minification
+      - name: Inline all assets into HTML
         run: |
-          echo "=== CSS files content check ==="
-          head -3 css.css
-          head -3 small.css
+          # Create backup of original HTML
+          cp index.html index.original.html
 
-      - name: Verify JS minification
+          # Read minified CSS content
+          CSS_CONTENT=$(cat css.min.css)
+          SMALL_CSS_CONTENT=$(cat small.min.css)
+
+          # Read minified JS content
+          FUNC_JS_CONTENT=$(cat func.min.js)
+          INDEX_JS_CONTENT=$(cat index.min.js)
+
+          # Replace CSS link tags with inline styles
+          sed -i 's|<link rel="stylesheet" href="css.css">|<style>'"$CSS_CONTENT"'</style>|g' index.html
+          sed -i 's|<link rel="stylesheet" href="small.css">|<style>'"$SMALL_CSS_CONTENT"'</style>|g' index.html
+
+          # Replace JS script tags with inline scripts
+          sed -i 's|<script src="func.js"></script>|<script>'"$FUNC_JS_CONTENT"'</script>|g' index.html
+          sed -i 's|<script src="index.js"></script>|<script>'"$INDEX_JS_CONTENT"'</script>|g' index.html
+
+          echo "=== All assets inlined into HTML ==="
+
+      - name: Verify inlined HTML
         run: |
-          echo "=== JS files content check ==="
-          head -1 func.js
-          head -1 index.js
+          echo "=== Final HTML file size ==="
+          wc -c index.html index.original.html
+          echo "=== Checking for external references (should be none) ==="
+          grep -E "(css|js)" index.html || echo "No external CSS/JS references found - success!"
+          echo "=== First 20 lines of final HTML ==="
+          head -20 index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
