@@ -570,7 +570,7 @@ class Selected {
 		'Vet du vad kinapuffar är?',
 		'Är det okej att spotta ut tuggummi på marken?',
 		'Har du varit på Ullared?',
-		'Om du fick 100\'000kr, skulle du börja gymma 3 dagar i veckan i 120 dagar?',
+		"Om du fick 100'000kr, skulle du börja gymma 3 dagar i veckan i 120 dagar?",
 		'Vilken är den bästa icebreakern när du ska "ragga" eller bryta isen med en ny person du är intresserad av?',
 		'Att ha flera serier att titta på där du tittar på en eller två episoder max per dag istället för att streckkolla gör att du inte ledsnar lika fort.',
 		'Hamburgare eller kebab?',
@@ -700,11 +700,12 @@ class Selected {
 		'Träffar du helst en ny person digitalt (Badoo/Tinder/Boo/etc) eller i person?',
 		'Föredrar du att vara den som bestämmer i ett förhållande?',
 		'Vad hindrar dig från att ändra ditt liv för att bli bättre?',
-		'Är du en s.k. grammatiknazist?',
+		'Är du en s.k. grammar nazzi?',
 		'Har du en bra lön?',
 		'Klagar du lätt?',
 		'Är Gorbys piroger bättre än panpizza?',
 		'Har du mer kill- eller tjejkompisar?',
+		'Har du hört talas om kampsporten "Jodo"?',
 		'Lär du dig aktivt på din arbetsplats?',
 		'När kliver du upp på morgon?',
 		'Vilken är din mest värdefulla (sentimentalt eller dyrast) ägodel?',
@@ -2328,7 +2329,7 @@ class Selected {
 		'Vad anser du vara syftet med livet enligt din tro?',
 		'Hur förhåller du dig till andliga texter eller skrifter?',
 		'Har du några speciella helgdagar eller högtider som är viktiga för dig?',
-		'Är du speciell?'
+		'Är du speciell?',
 	];
 	increment = () => {
 		this.counter++;
