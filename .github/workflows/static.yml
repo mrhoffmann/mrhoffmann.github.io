@@ -41,19 +41,21 @@ jobs:
 
       - name: Minify CSS files only
         run: |
+          # Create minified versions
           cleancss -o css.min.css css.css
           cleancss -o small.min.css small.css
-          echo "=== Original vs Minified CSS sizes ==="
-          wc -c css.css css.min.css
-          wc -c small.css small.min.css
+          # Replace original files with minified versions
+          mv css.min.css css.css
+          mv small.min.css small.css
+          echo "=== CSS files minified in place ==="
+          ls -la *.css
+          wc -c *.css
 
-      - name: Update HTML to use minified CSS only
+      - name: Verify CSS minification
         run: |
-          sed 's|href="css\.css"|href="css.min.css"|g' index.html > temp.html
-          sed 's|href="small\.css"|href="small.min.css"|g' temp.html > index.html
-          rm temp.html
-          echo "=== Updated CSS references ==="
-          grep -E "\.css" index.html
+          echo "=== CSS files content check ==="
+          head -3 css.css
+          head -3 small.css
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
