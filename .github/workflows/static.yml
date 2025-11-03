@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["main"]
+    branches: ['main']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -17,7 +17,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -30,6 +30,39 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install minification tools
+        run: |
+          npm install -g clean-css-cli
+          npm install -g uglify-js
+          npm install -g html-minifier-terser
+
+      - name: Minify CSS files
+        run: |
+          cleancss -o css.min.css css.css
+          cleancss -o small.min.css small.css
+
+      - name: Minify JS files
+        run: |
+          uglifyjs func.js -o func.min.js -c -m
+          uglifyjs index.js -o index.min.js -c -m
+
+      - name: Update HTML to use minified files
+        run: |
+          sed -i 's/css\.css/css.min.css/g' index.html
+          sed -i 's/small\.css/small.min.css/g' index.html
+          sed -i 's/func\.js/func.min.js/g' index.html
+          sed -i 's/index\.js/index.min.js/g' index.html
+
+      - name: Minify HTML
+        run: |
+          html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true index.html -o index.html
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
