@@ -44,26 +44,36 @@ jobs:
 
       - name: Minify CSS files
         run: |
-          cleancss -o css.min.css css.css
-          cleancss -o small.min.css small.css
+          echo "/* MINIFIED BY GITHUB ACTIONS $(date) */" > css.min.css
+          cleancss css.css >> css.min.css
+          echo "/* MINIFIED BY GITHUB ACTIONS $(date) */" > small.min.css
+          cleancss small.css >> small.min.css
           ls -la *.css
+          echo "=== CSS file sizes ==="
+          wc -c *.css
 
       - name: Minify JS files
         run: |
-          uglifyjs func.js -o func.min.js -c -m
-          uglifyjs index.js -o index.min.js -c -m
+          echo "/* MINIFIED BY GITHUB ACTIONS $(date) */" > func.min.js
+          uglifyjs func.js -c -m >> func.min.js
+          echo "/* MINIFIED BY GITHUB ACTIONS $(date) */" > index.min.js
+          uglifyjs index.js -c -m >> index.min.js
           ls -la *.js
+          echo "=== JS file sizes ==="
+          wc -c *.js
 
       - name: Update HTML to use minified files
         run: |
           cp index.html index.html.backup
-          sed 's|href="css\.css"|href="css.min.css"|g' index.html.backup > temp1.html
+          # Add debug comment to HTML
+          sed '1i<!-- PROCESSED BY GITHUB ACTIONS '"$(date)"' -->' index.html.backup > temp0.html
+          sed 's|href="css\.css"|href="css.min.css"|g' temp0.html > temp1.html
           sed 's|href="small\.css"|href="small.min.css"|g' temp1.html > temp2.html
           sed 's|src="func\.js"|src="func.min.js"|g' temp2.html > temp3.html
           sed 's|src="index\.js"|src="index.min.js"|g' temp3.html > index.html
-          rm temp1.html temp2.html temp3.html index.html.backup
+          rm temp0.html temp1.html temp2.html temp3.html index.html.backup
           echo "Updated HTML file:"
-          grep -E "(css|js)" index.html
+          grep -E "(css|js|PROCESSED)" index.html
 
       - name: Minify HTML
         run: |
