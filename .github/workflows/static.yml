@@ -36,47 +36,24 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install minification tools
-        run: |
-          npm install -g clean-css-cli
-          npm install -g uglify-js
-          npm install -g html-minifier-terser
+      - name: Install CSS minification tool
+        run: npm install -g clean-css-cli
 
-      - name: Minify CSS files
+      - name: Minify CSS files only
         run: |
           cleancss -o css.min.css css.css
           cleancss -o small.min.css small.css
-          ls -la *.css
+          echo "=== Original vs Minified CSS sizes ==="
+          wc -c css.css css.min.css
+          wc -c small.css small.min.css
 
-      - name: Minify JS files
+      - name: Update HTML to use minified CSS only
         run: |
-          uglifyjs func.js -o func.min.js -c -m
-          uglifyjs index.js -o index.min.js -c -m
-          ls -la *.js
-
-      - name: Update HTML to use minified files
-        run: |
-          cp index.html index.html.backup
-          sed 's|href="css\.css"|href="css.min.css"|g' index.html.backup > temp1.html
-          sed 's|href="small\.css"|href="small.min.css"|g' temp1.html > temp2.html
-          sed 's|src="func\.js"|src="func.min.js"|g' temp2.html > temp3.html
-          sed 's|src="index\.js"|src="index.min.js"|g' temp3.html > index.html
-          rm temp1.html temp2.html temp3.html index.html.backup
-          echo "Updated HTML file:"
-          grep -E "(css|js)" index.html
-
-      - name: Minify HTML
-        run: |
-          html-minifier-terser --collapse-whitespace --remove-comments --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true --minify-js true --conservative-collapse index.html -o index.html
-
-      - name: Verify minified files
-        run: |
-          echo "=== Checking all files ==="
-          ls -la *.css *.js *.html
-          echo "=== Final HTML content (first 50 lines) ==="
-          head -50 index.html
-          echo "=== CSS/JS references in HTML ==="
-          grep -E "(css|js)" index.html
+          sed 's|href="css\.css"|href="css.min.css"|g' index.html > temp.html
+          sed 's|href="small\.css"|href="small.min.css"|g' temp.html > index.html
+          rm temp.html
+          echo "=== Updated CSS references ==="
+          grep -E "\.css" index.html
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
