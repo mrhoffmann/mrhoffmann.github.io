@@ -37,7 +37,9 @@ jobs:
           node-version: '18'
 
       - name: Install CSS minification tool
-        run: npm install -g clean-css-cli
+        run: |
+          npm install -g clean-css-cli
+          npm install -g uglify-js
 
       - name: Minify CSS files only
         run: |
@@ -51,11 +53,29 @@ jobs:
           ls -la *.css
           wc -c *.css
 
+      - name: Minify JS files
+        run: |
+          # Create minified versions
+          uglifyjs func.js -o func.min.js -c -m
+          uglifyjs index.js -o index.min.js -c -m
+          # Replace original files with minified versions
+          mv func.min.js func.js
+          mv index.min.js index.js
+          echo "=== JS files minified in place ==="
+          ls -la *.js
+          wc -c *.js
+
       - name: Verify CSS minification
         run: |
           echo "=== CSS files content check ==="
           head -3 css.css
           head -3 small.css
+
+      - name: Verify JS minification
+        run: |
+          echo "=== JS files content check ==="
+          head -1 func.js
+          head -1 index.js
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
