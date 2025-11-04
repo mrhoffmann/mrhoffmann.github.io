@@ -1678,6 +1678,7 @@ class Selected {
 		'Sämsta dejtupplevelsen?',
 		'Sämsta superkraften?',
 		'Parfym som luktar bäst?',
+		'<a href="https://www.youtube.com/watch?v=PEe-ZeVbTLo" target="_blank">Nice day for fishing aint it?</a>',
 		'Hur mycket pengar investerar du i dig själv månadsvis?',
 		'Äger du ett par hörlurar?',
 		'Favoritsadjektiv att kalla en jobbig person?',
