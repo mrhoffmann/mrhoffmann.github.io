@@ -1,34 +1,28 @@
-# Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ['main']
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: 'pages'
   cancel-in-progress: true
 
 jobs:
-  # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v5
 
       - name: Setup Node.js
@@ -36,34 +30,27 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install CSS minification tool
+      - name: Install CSS minifier
         run: npm install -g clean-css-cli
 
-      - name: Minify CSS files only
+      - name: Minify all CSS files recursively
         run: |
-          # Create minified versions
-          cleancss -o css.min.css css.css
-          cleancss -o small.min.css small.css
-          # Replace original files with minified versions
-          mv css.min.css css.css
-          mv small.min.css small.css
-          echo "=== CSS files minified in place ==="
-          ls -la *.css
-          wc -c *.css
-
-      - name: Verify CSS minification
-        run: |
-          echo "=== CSS files content check ==="
-          head -3 css.css
-          head -3 small.css
+          echo "=== Minifying all CSS files ==="
+          find . -type f -name "*.css" ! -name "*.min.css" | while read -r file; do
+            echo "Minifying $file ..."
+            cleancss -o "${file}.min" "$file"
+            mv "${file}.min" "$file"
+          done
+          echo "=== Minification complete ==="
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          # Upload entire repository
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
