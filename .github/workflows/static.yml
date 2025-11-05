@@ -31,13 +31,22 @@ jobs:
           node-version: '18'
 
       - name: Install CSS minifier
-        run: npm install -g clean-css-cli
+        run: npm install -g clean-css-cli purgecss
 
-      - name: Minify all CSS files recursively
+      - name: Run PurgeCSS to remove unused selectors
         run: |
-          echo "=== Minifying all CSS files ==="
-          find . -type f -name "*.css" ! -name "*.min.css" | while read -r file; do
-            echo "Minifying $file ..."
+          echo "=== Running PurgeCSS ==="
+          # Example: assumes your HTML is in ./ and CSS in ./css/
+          purgecss \
+            --css css/*.css \
+            --content "**/*.html" "**/*.js" \
+            --output css/
+          echo "=== PurgeCSS complete ==="
+
+      - name: Minify Purged CSS
+        run: |
+          echo "=== Minifying Purged CSS ==="
+          find ./css -type f -name "*.css" ! -name "*.min.css" | while read -r file; do
             cleancss -o "${file}.min" "$file"
             mv "${file}.min" "$file"
           done
